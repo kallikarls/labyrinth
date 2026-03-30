@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Labyrinth" />
+  <meta name="description" content="A fun tilt-to-play labyrinth ball game for kids. Tilt your device to roll the ball through the maze!" />
+  <title>Labyrinth — Tilt & Roll!</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Game Canvas -->
+  <canvas id="gameCanvas"></canvas>
+
+  <!-- START SCREEN -->
+  <div id="startScreen" class="screen active">
+    <div class="screen-content">
+      <div class="logo-wrap">
+        <div class="logo-ball"></div>
+        <h1 class="logo-title">Labyrinth</h1>
+        <p class="logo-sub">Tilt to Roll! 🎉</p>
+      </div>
+
+      <div class="level-select">
+        <p class="level-label">Choose your level:</p>
+        <div class="level-buttons">
+          <button id="btnEasy" class="level-btn easy" data-level="easy">
+            <span class="level-icon">🐢</span>
+            <span class="level-name">Easy</span>
+            <span class="level-desc">6×6</span>
+            <span id="starsEasy" class="level-stars"></span>
+          </button>
+          <button id="btnMedium" class="level-btn medium" data-level="medium">
+            <span class="level-icon">🐇</span>
+            <span class="level-name">Medium</span>
+            <span class="level-desc">8×8</span>
+            <span id="starsMedium" class="level-stars"></span>
+          </button>
+          <button id="btnHard" class="level-btn hard" data-level="hard">
+            <span class="level-icon">🦁</span>
+            <span class="level-name">Hard</span>
+            <span class="level-desc">10×10</span>
+            <span id="starsHard" class="level-stars"></span>
+          </button>
+        </div>
+      </div>
+
+      <p class="hint-text" id="hintText">Tilt your device to roll the ball!</p>
+    </div>
+  </div>
+
+  <!-- HUD (shown while playing) -->
+  <div id="hud" class="screen">
+    <div class="hud-top">
+      <button id="btnHome" class="hud-btn" aria-label="Home">🏠</button>
+      <div class="hud-level-name" id="hudLevelName">Easy</div>
+      <button id="btnMute" class="hud-btn" aria-label="Toggle sound">🔊</button>
+    </div>
+    <div class="hud-bottom">
+      <button id="btnNewMaze" class="hud-btn-pill">🔀 New Maze</button>
+    </div>
+  </div>
+
+  <!-- WIN SCREEN -->
+  <div id="winScreen" class="screen">
+    <div class="win-content">
+      <div class="win-emoji" id="winEmoji">🌟</div>
+      <h2 class="win-title">Amazing!</h2>
+      <p class="win-sub" id="winSub">You found the exit!</p>
+      <div class="win-stars" id="winStars"></div>
+      <div class="win-buttons">
+        <button id="btnPlayAgain" class="win-btn primary">🔀 New Maze</button>
+        <button id="btnGoHome" class="win-btn secondary">🏠 Home</button>
+      </div>
+    </div>
+    <canvas id="confettiCanvas"></canvas>
+  </div>
+
+  <!-- KEYBOARD HINT (desktop only) -->
+  <div id="keyboardHint" class="keyboard-hint">
+    <span>Use arrow keys or WASD to control the ball</span>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
