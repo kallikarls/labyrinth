@@ -476,6 +476,8 @@ function makeDog() {
 }
 
 export const DRAWINGS = [
+  // Blank page for free drawing
+  { id: 'blank',   name: 'Blank Page',  emoji: '✏️', svg: S('') },
   // Patterns
   { id: 'mandala', name: 'Mandala', emoji: '🌸', svg: makeMandala() },
   { id: 'sun',     name: 'Sun Art', emoji: '☀️', svg: makeSunPattern() },
