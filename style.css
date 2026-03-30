@@ -245,6 +245,10 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+#hud.active .hud-top,
+#hud.active .hud-bottom {
   pointer-events: all;
 }
 
@@ -468,6 +472,7 @@ html, body {
 
 /* Shared coloring screens */
 .cb-screen {
+  flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
   background: #f5f0e8;
@@ -529,6 +534,7 @@ html, body {
   gap: 16px;
   padding: 20px;
   overflow-y: auto;
+  align-content: start;
   flex: 1;
 }
 
