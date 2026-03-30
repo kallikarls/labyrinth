@@ -117,6 +117,9 @@ export class Game {
     this.maze = generateMaze(this.mazeCols, this.mazeRows);
     this._rebuildLayout();
     this.trail.clear();
+    // Re-calibrate gyroscope neutral position for each new maze
+    // (handles orientation changes between levels or new maze generations)
+    if (this.input.recalibrate) this.input.recalibrate();
   }
 
   _rebuildLayout() {

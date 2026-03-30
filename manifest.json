@@ -2,21 +2,39 @@
   "name": "Labyrinth — Tilt & Roll!",
   "short_name": "Labyrinth",
   "description": "A fun tilt-to-play labyrinth ball game for kids. Tilt your device to roll the ball through the maze!",
-  "start_url": "./",
+  "start_url": "./index.html",
+  "id": "/labyrinth/",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#3d2005",
   "theme_color": "#3d2005",
-  "orientation": "any",
+  "categories": ["games", "kids"],
   "icons": [
+    {
+      "src": "icons/icon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
     {
       "src": "icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Labyrinth game"
     }
   ]
 }
