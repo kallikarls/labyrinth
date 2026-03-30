@@ -1,18 +1,16 @@
 /**
- * main.js — App entry point. Creates the Game and starts it.
+ * main.js — App entry point. Boots both the maze game and the coloring book.
  */
 
-import { Game } from './game.js';
+import { Game }     from './game.js';
+import { Coloring } from './coloring/coloring.js';
 
-// Wait for DOM, then boot
 window.addEventListener('DOMContentLoaded', () => {
-  const game = new Game();
+  const game     = new Game();
+  const coloring = new Coloring();
   game.start();
 
-  // Register service worker for PWA offline support
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').catch(() => {
-      // SW registration is optional — game works without it
-    });
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
   }
 });

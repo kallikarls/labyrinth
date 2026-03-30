@@ -55,6 +55,10 @@
         </div>
       </div>
 
+      <div class="colorbook-teaser">
+        <button id="btnColorBook" class="colorbook-btn">🎨 Color Book</button>
+      </div>
+
       <p class="hint-text" id="hintText">Tilt your device to roll the ball!</p>
     </div>
   </div>
@@ -89,6 +93,38 @@
   <!-- KEYBOARD HINT (desktop only) -->
   <div id="keyboardHint" class="keyboard-hint">
     <span>Use arrow keys or WASD to control the ball</span>
+  </div>
+
+  <!-- GALLERY SCREEN -->
+  <div id="galleryScreen" class="screen cb-screen">
+    <div class="cb-header">
+      <button id="btnGalleryBack" class="cb-back-btn">🏠 Home</button>
+      <h2 class="cb-title">🎨 Color Book</h2>
+      <span></span>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+
+  <!-- COLORING SCREEN -->
+  <div id="coloringScreen" class="screen cb-screen">
+    <div class="cb-header">
+      <button id="btnColoringBack" class="cb-back-btn">← Back</button>
+      <span class="cb-title" id="coloringTitle">Drawing</span>
+      <div class="cb-header-actions">
+        <button id="btnColoringClear" class="cb-action-btn" title="Clear">🗑️</button>
+        <button id="btnColoringSave"  class="cb-action-btn" title="Save image">💾</button>
+      </div>
+    </div>
+    <div id="coloringCanvasWrap" class="coloring-canvas-wrap">
+      <canvas id="coloringCanvas"></canvas>
+    </div>
+    <div class="coloring-panel">
+      <div class="panel-row">
+        <div id="toolsRow" class="tools-row"></div>
+        <div id="sizesRow" class="sizes-row"></div>
+      </div>
+      <div id="paletteGrid" class="palette-grid"></div>
+    </div>
   </div>
 
   <script type="module" src="js/main.js"></script>
