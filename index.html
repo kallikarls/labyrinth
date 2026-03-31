@@ -55,8 +55,9 @@
         </div>
       </div>
 
-      <div class="colorbook-teaser">
+      <div class="game-teasers">
         <button id="btnColorBook" class="colorbook-btn">🎨 Color Book</button>
+        <button id="btnSnake" class="snake-teaser-btn">🐍 Snake</button>
       </div>
 
       <p class="hint-text" id="hintText">Tilt your device to roll the ball!</p>
@@ -124,6 +125,31 @@
         <div id="sizesRow" class="sizes-row"></div>
       </div>
       <div id="paletteGrid" class="palette-grid"></div>
+    </div>
+  </div>
+
+  <!-- SNAKE SCREEN -->
+  <div id="snakeScreen" class="screen snake-screen">
+    <canvas id="snakeCanvas"></canvas>
+    <div class="snake-hud">
+      <button id="btnSnakeHome" class="hud-btn" aria-label="Home">🏠</button>
+      <div class="snake-hud-score">
+        <span id="snakeScore">Score: 0</span>
+        <span id="snakeBest">Best: 0</span>
+      </div>
+      <button id="btnSnakePause" class="hud-btn" aria-label="Pause">⏸</button>
+    </div>
+    <div id="snakeOverlay" class="snake-overlay">
+      <div class="snake-over-content">
+        <div class="snake-over-emoji">🐍</div>
+        <h2 class="snake-over-title">Game Over!</h2>
+        <p id="snakeFinalScore" class="snake-over-score">Score: 0</p>
+        <p id="snakeNewBest" class="snake-new-best">🎉 New Best!</p>
+        <div class="snake-over-buttons">
+          <button id="btnSnakeRestart" class="win-btn primary">🔄 Play Again</button>
+          <button id="btnSnakeOverHome" class="win-btn secondary">🏠 Home</button>
+        </div>
+      </div>
     </div>
   </div>
 
