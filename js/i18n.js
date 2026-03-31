@@ -89,6 +89,12 @@ export const STRINGS = {
     siWave:           'Orusta búin! 🎉',
     siNextWave:       'Næsta orusta 🚀',
     siPlayAgain:      '🔄 Spila aftur',
+    // Ping Pong 3D
+    ppName:           'Ping Pong 3D',
+    ppDesc:           'Haltu boltanum á lofti með rekjunni',
+    ppStart:          '🏓 Byrja',
+    ppTapLaunch:      'Strjúktu / smelltu til að skjóta upp!',
+    ppPlayAgain:      '🔄 Spila aftur',
     // Language toggle
     langLabel:        'EN',
   },
@@ -172,6 +178,12 @@ export const STRINGS = {
     siWave:           'Wave Clear! 🎉',
     siNextWave:       'Next Wave 🚀',
     siPlayAgain:      '🔄 Play Again',
+    // Ping Pong 3D
+    ppName:           'Ping Pong 3D',
+    ppDesc:           'Tilt your device to keep the ball bouncing',
+    ppStart:          '🏓 Play',
+    ppTapLaunch:      'Tap / click to launch!',
+    ppPlayAgain:      '🔄 Play Again',
     breakoutLevel:    'Level',
     breakoutWin:      'Amazing! 🎉',
     breakoutLaunch:   'Tap or press Space to launch!',
@@ -262,6 +274,10 @@ export function applyAll() {
   // Space Invaders home card
   _setText('siName',           t('siName'));
   _setText('siDesc',           t('siDesc'));
+
+  // Ping Pong 3D home card
+  _setText('ppName',           t('ppName'));
+  _setText('ppDesc',           t('ppDesc'));
 
   // Color Book
   _setText('galleryTitle',     t('colorBook'));

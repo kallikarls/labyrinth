@@ -8,6 +8,7 @@ import { Snake }    from './snake.js';
 import { Tetris }   from './tetris.js';
 import { Breakout }       from './breakout.js';
 import { SpaceInvaders }  from './spaceinvaders.js';
+import { PingPong }       from './pingpong.js';
 import { applyAll, setLang } from './i18n.js';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -20,12 +21,14 @@ window.addEventListener('DOMContentLoaded', () => {
   const tetris   = new Tetris();
   const breakout       = new Breakout();
   const spaceInvaders  = new SpaceInvaders();
+  const pingPong       = new PingPong();
   game.start();
 
   document.getElementById('btnSnake').addEventListener('click', () => snake.open());
   document.getElementById('btnTetris').addEventListener('click', () => tetris.open());
   document.getElementById('btnBreakout').addEventListener('click', () => breakout.open());
   document.getElementById('btnSpaceInvaders').addEventListener('click', () => spaceInvaders.open());
+  document.getElementById('btnPingPong').addEventListener('click', () => pingPong.open());
   document.getElementById('btnLangIS').addEventListener('click', () => {
     setLang('is');
     game._updateStarDisplay();

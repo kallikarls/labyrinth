@@ -73,6 +73,13 @@
             <span id="siDesc" class="game-card-desc">Skjóttu geimverunum</span>
           </div>
         </button>
+        <button id="btnPingPong" class="game-card pp-card">
+          <span class="game-card-icon">🏓</span>
+          <div class="game-card-text">
+            <span id="ppName" class="game-card-name">Ping Pong 3D</span>
+            <span id="ppDesc" class="game-card-desc">Haltu boltanum á lofti með rekjunni</span>
+          </div>
+        </button>
       </div>
       <div class="lang-switcher">
         <button id="btnLangIS" class="lang-flag-btn active" title="Íslenska"><span class="fi fi-is"></span> Íslenska</button>
@@ -262,6 +269,32 @@
         <div class="breakout-over-buttons">
           <button id="btnBreakoutRestart" class="win-btn primary">🔄 Spila aftur</button>
           <button id="btnBreakoutOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PING PONG 3D SCREEN -->
+  <div id="ppScreen" class="screen pp-screen">
+    <div id="ppContainer" class="pp-container"></div>
+    <div class="pp-hud">
+      <button id="btnPPHome" class="hud-btn" aria-label="Heim">🏠</button>
+      <div class="pp-hud-info">
+        <span id="ppScore">Stig: 0</span>
+        <span id="ppBest">Best: 0</span>
+      </div>
+      <button id="btnPPPause" class="hud-btn" aria-label="Pasa">⏸</button>
+    </div>
+    <div id="ppHint" class="pp-hint" style="display:none"></div>
+    <div id="ppOverlay" class="pp-overlay" style="display:none">
+      <div class="pp-over-content">
+        <div class="pp-over-emoji">🏓</div>
+        <h2 id="ppOverTitle" class="pp-over-title"></h2>
+        <p id="ppFinalScore" class="pp-over-score"></p>
+        <p id="ppNewBest" class="pp-new-best">🎉 Nýtt met!</p>
+        <div class="pp-over-buttons">
+          <button id="btnPPRestart" class="win-btn primary">Spila</button>
+          <button id="btnPPOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
         </div>
       </div>
     </div>
