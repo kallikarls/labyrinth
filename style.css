@@ -1115,3 +1115,104 @@ html, body {
   .tetris-next-wrap { top: 56px; right: 6px; }
 }
 
+/* ══════════════════════════════════════════════════════
+   BREAKOUT GAME
+   ══════════════════════════════════════════════════════ */
+
+.breakout-card { border-color: rgba(77,184,255,0.5); }
+.breakout-card:hover { box-shadow: 0 8px 32px rgba(77,184,255,0.3); }
+.breakout-card .game-card-name { color: #4db8ff; }
+
+.breakout-screen {
+  background: #0d0f14;
+}
+
+#breakoutCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.breakout-hud {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  z-index: 5;
+  pointer-events: all;
+  background: rgba(13,15,20,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(77,184,255,0.3);
+}
+
+.breakout-hud-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.breakout-hud-info span {
+  color: #4db8ff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.breakout-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.75);
+  z-index: 10;
+}
+
+.breakout-over-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: var(--glass-bg);
+  border: 2px solid rgba(77,184,255,0.45);
+  border-radius: var(--radius-lg);
+  padding: 36px 48px;
+  box-shadow: var(--shadow-lg);
+  width: min(92vw, 380px);
+}
+
+.breakout-over-emoji { font-size: 3rem; }
+
+.breakout-over-title {
+  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  font-weight: 900;
+  color: var(--accent-gold);
+}
+
+.breakout-over-score {
+  font-size: 1.8rem;
+  color: #4db8ff;
+  font-weight: 800;
+}
+
+.breakout-new-best {
+  font-size: 1.1rem;
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.breakout-over-buttons {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+@media (max-width: 420px) {
+  .breakout-hud-info span:nth-child(4) { display: none; }
+}
+

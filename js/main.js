@@ -6,6 +6,7 @@ import { Game }     from './game.js';
 import { Coloring } from './coloring/coloring.js';
 import { Snake }    from './snake.js';
 import { Tetris }   from './tetris.js';
+import { Breakout } from './breakout.js';
 import { applyAll, setLang } from './i18n.js';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -16,10 +17,12 @@ window.addEventListener('DOMContentLoaded', () => {
   const coloring = new Coloring();
   const snake    = new Snake();
   const tetris   = new Tetris();
+  const breakout  = new Breakout();
   game.start();
 
   document.getElementById('btnSnake').addEventListener('click', () => snake.open());
   document.getElementById('btnTetris').addEventListener('click', () => tetris.open());
+  document.getElementById('btnBreakout').addEventListener('click', () => breakout.open());
   document.getElementById('btnLangIS').addEventListener('click', () => {
     setLang('is');
     game._updateStarDisplay();

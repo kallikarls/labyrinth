@@ -59,6 +59,13 @@
             <span id="tetrisDesc" class="game-card-desc">Staðlaegi kubba og hættu ekki</span>
           </div>
         </button>
+        <button id="btnBreakout" class="game-card breakout-card">
+          <span class="game-card-icon">🎾</span>
+          <div class="game-card-text">
+            <span id="breakoutName" class="game-card-name">Breakout</span>
+            <span id="breakoutDesc" class="game-card-desc">Brotnaðu í gegnum kubba með bolta</span>
+          </div>
+        </button>
       </div>
       <div class="lang-switcher">
         <button id="btnLangIS" class="lang-flag-btn active" title="Íslenska"><span class="fi fi-is"></span> Íslenska</button>
@@ -221,6 +228,33 @@
         <div class="tetris-over-buttons">
           <button id="btnTetrisRestart" class="win-btn primary">🔄 Spila aftur</button>
           <button id="btnTetrisOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BREAKOUT SCREEN -->
+  <div id="breakoutScreen" class="screen breakout-screen">
+    <canvas id="breakoutCanvas"></canvas>
+    <div class="breakout-hud">
+      <button id="btnBreakoutHome" class="hud-btn" aria-label="Heim">🏠</button>
+      <div class="breakout-hud-info">
+        <span id="breakoutScore">Stig: 0</span>
+        <span id="breakoutLevel">Stig: 1</span>
+        <span id="breakoutLives">❤️❤️❤️</span>
+        <span id="breakoutBest">Best: 0</span>
+      </div>
+      <button id="btnBreakoutPause" class="hud-btn" aria-label="Pasa">⏸</button>
+    </div>
+    <div id="breakoutOverlay" class="breakout-overlay" style="display:none">
+      <div class="breakout-over-content">
+        <div class="breakout-over-emoji">🎾</div>
+        <h2 id="breakoutOverTitle" class="breakout-over-title">Leik lokið!</h2>
+        <p id="breakoutFinalScore" class="breakout-over-score">0</p>
+        <p id="breakoutNewBest" class="breakout-new-best">🎉 Nýtt met!</p>
+        <div class="breakout-over-buttons">
+          <button id="btnBreakoutRestart" class="win-btn primary">🔄 Spila aftur</button>
+          <button id="btnBreakoutOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
         </div>
       </div>
     </div>

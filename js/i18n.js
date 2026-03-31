@@ -75,6 +75,13 @@ export const STRINGS = {
     tetrisLines:      'Línur',
     tetrisNext:       'Næst',
     tetrisPlayAgain:  '🔄 Spila aftur',
+    // Breakout
+    breakoutName:     'Breakout',
+    breakoutDesc:     'Brotnaðu í gegnum kubba með bolta',
+    breakoutLevel:    'Stig',
+    breakoutWin:      'Frábært! 🎉',
+    breakoutLaunch:   'Stryktú eða smelltu til að skjota!',
+    breakoutPlayAgain:'  🔄 Spila aftur',
     // Language toggle
     langLabel:        'EN',
   },
@@ -148,6 +155,13 @@ export const STRINGS = {
     tetrisLines:      'Lines',
     tetrisNext:       'Next',
     tetrisPlayAgain:  '🔄 Play Again',
+    // Breakout
+    breakoutName:     'Breakout',
+    breakoutDesc:     'Smash the bricks with the ball',
+    breakoutLevel:    'Level',
+    breakoutWin:      'Amazing! 🎉',
+    breakoutLaunch:   'Tap or press Space to launch!',
+    breakoutPlayAgain:'🔄 Play Again',
     // Language toggle
     langLabel:        'IS',
   },
@@ -226,6 +240,10 @@ export function applyAll() {
   _setText('tetrisName',       t('tetrisName'));
   _setText('tetrisDesc',       t('tetrisDesc'));
   _setText('tetrisNextLabel',  t('tetrisNext'));
+
+  // Breakout home card
+  _setText('breakoutName',     t('breakoutName'));
+  _setText('breakoutDesc',     t('breakoutDesc'));
 
   // Color Book
   _setText('galleryTitle',     t('colorBook'));
