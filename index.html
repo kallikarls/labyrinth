@@ -52,6 +52,13 @@
             <span id="colorBookDesc" class="game-card-desc">Teiknaðu og litaðu skemmtilegar myndir</span>
           </div>
         </button>
+        <button id="btnTetris" class="game-card tetris-card">
+          <span class="game-card-icon">🧱</span>
+          <div class="game-card-text">
+            <span id="tetrisName" class="game-card-name">Tetris</span>
+            <span id="tetrisDesc" class="game-card-desc">Staðlaegi kubba og hættu ekki</span>
+          </div>
+        </button>
       </div>
       <div class="lang-switcher">
         <button id="btnLangIS" class="lang-flag-btn active" title="Íslenska"><span class="fi fi-is"></span> Íslenska</button>
@@ -183,6 +190,37 @@
         <div class="snake-over-buttons">
           <button id="btnSnakeRestart" class="win-btn primary">🔄 Spila aftur</button>
           <button id="btnSnakeOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TETRIS SCREEN -->
+  <div id="tetrisScreen" class="screen tetris-screen">
+    <canvas id="tetrisCanvas"></canvas>
+    <div class="tetris-hud">
+      <button id="btnTetrisHome" class="hud-btn" aria-label="Heim">🏠</button>
+      <div class="tetris-hud-info">
+        <span id="tetrisScore">Stig: 0</span>
+        <span id="tetrisLevel">Stig: 1</span>
+        <span id="tetrisLines">Línur: 0</span>
+        <span id="tetrisBest">Best: 0</span>
+      </div>
+      <button id="btnTetrisPause" class="hud-btn" aria-label="Pasa">⏸</button>
+    </div>
+    <div class="tetris-next-wrap">
+      <div class="tetris-next-label" id="tetrisNextLabel">Næst</div>
+      <canvas id="tetrisNextCanvas"></canvas>
+    </div>
+    <div id="tetrisOverlay" class="tetris-overlay" style="display:none">
+      <div class="tetris-over-content">
+        <div class="tetris-over-emoji">🧱</div>
+        <h2 class="tetris-over-title">Leik lokið!</h2>
+        <p id="tetrisFinalScore" class="tetris-over-score">0</p>
+        <p id="tetrisNewBest" class="tetris-new-best">🎉 Nýtt met!</p>
+        <div class="tetris-over-buttons">
+          <button id="btnTetrisRestart" class="win-btn primary">🔄 Spila aftur</button>
+          <button id="btnTetrisOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
         </div>
       </div>
     </div>

@@ -67,7 +67,15 @@ export const STRINGS = {
     size_large:       'Stórt',
     // Coloring actions
     clearCanvas:      'Hætta við',
-    saveImage:        'Vista mynd',    // Language toggle
+    saveImage:        'Vista mynd',
+    // Tetris
+    tetrisName:       'Tetris',
+    tetrisDesc:       'Staflaðu saman kubbum',
+    tetrisLevel:      'Stig',
+    tetrisLines:      'Línur',
+    tetrisNext:       'Næst',
+    tetrisPlayAgain:  '🔄 Spila aftur',
+    // Language toggle
     langLabel:        'EN',
   },
   en: {
@@ -133,6 +141,13 @@ export const STRINGS = {
     // Coloring actions
     clearCanvas:      'Clear',
     saveImage:        'Save image',
+    // Tetris
+    tetrisName:       'Tetris',
+    tetrisDesc:       'Stack the blocks without filling up',
+    tetrisLevel:      'Level',
+    tetrisLines:      'Lines',
+    tetrisNext:       'Next',
+    tetrisPlayAgain:  '🔄 Play Again',
     // Language toggle
     langLabel:        'IS',
   },
@@ -206,6 +221,11 @@ export function applyAll() {
   _setText('snakeOverTitle',   t('gameOver'));
   _setText('snakeNewBest',     t('newBest'));
   _setText('btnSnakeRestart',  t('snakePlayAgain'));
+
+  // Tetris home card
+  _setText('tetrisName',       t('tetrisName'));
+  _setText('tetrisDesc',       t('tetrisDesc'));
+  _setText('tetrisNextLabel',  t('tetrisNext'));
 
   // Color Book
   _setText('galleryTitle',     t('colorBook'));
