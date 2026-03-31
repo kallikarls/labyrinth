@@ -73,6 +73,13 @@
             <span id="siDesc" class="game-card-desc">Skjóttu geimverunum</span>
           </div>
         </button>
+        <button id="btnRacer" class="game-card racer-card">
+          <span class="game-card-icon">🏎️</span>
+          <div class="game-card-text">
+            <span id="racerName" class="game-card-name">Akstur</span>
+            <span id="racerDesc" class="game-card-desc">Hallaðu til að aka</span>
+          </div>
+        </button>
 
       </div>
       <div class="lang-switcher">
@@ -263,6 +270,32 @@
         <div class="breakout-over-buttons">
           <button id="btnBreakoutRestart" class="win-btn primary">🔄 Spila aftur</button>
           <button id="btnBreakoutOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RACER SCREEN -->
+  <div id="racerScreen" class="screen racer-screen">
+    <div id="racerContainer" class="racer-container"></div>
+    <div class="racer-hud">
+      <button id="btnRacerHome" class="hud-btn" aria-label="Heim">🏠</button>
+      <div class="racer-hud-info">
+        <span id="racerScore">0 m</span>
+        <span id="racerSpeed">0 km/h</span>
+        <span id="racerBest">Best: 0 m</span>
+      </div>
+      <button id="btnRacerPause" class="hud-btn" aria-label="Pasa">⏸</button>
+    </div>
+    <div id="racerOverlay" class="racer-overlay" style="display:none">
+      <div class="racer-over-content">
+        <div class="racer-over-emoji">🏎️</div>
+        <h2 id="racerOverTitle" class="racer-over-title"></h2>
+        <p id="racerFinalScore" class="racer-over-score"></p>
+        <p id="racerNewBest" class="racer-new-best">🎉 Nýtt met!</p>
+        <div class="racer-over-buttons">
+          <button id="btnRacerRestart" class="win-btn primary">Aka!</button>
+          <button id="btnRacerOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
         </div>
       </div>
     </div>

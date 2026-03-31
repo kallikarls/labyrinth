@@ -1339,4 +1339,102 @@ html, body {
   .si-hud-info span:nth-child(4) { display: none; }
 }
 
+/* ══════════════════════════════════════════════════════
+   RACER
+   ══════════════════════════════════════════════════════ */
+
+.racer-card { border-color: rgba(255,140,0,0.5); }
+.racer-card:hover { box-shadow: 0 8px 32px rgba(255,140,0,0.3); }
+.racer-card .game-card-name { color: #ff8c00; }
+
+.racer-screen { overflow: hidden; }
+
+.racer-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.racer-hud {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  z-index: 5;
+  pointer-events: all;
+  background: rgba(13,15,20,0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,140,0,0.35);
+}
+
+.racer-hud-info {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.racer-hud-info span {
+  color: #ff8c00;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.racer-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.72);
+  z-index: 10;
+}
+
+.racer-over-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: var(--glass-bg);
+  border: 2px solid rgba(255,140,0,0.45);
+  border-radius: var(--radius-lg);
+  padding: 36px 48px;
+  box-shadow: var(--shadow-lg);
+  width: min(92vw, 380px);
+}
+
+.racer-over-emoji { font-size: 3rem; }
+
+.racer-over-title {
+  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  font-weight: 900;
+  color: var(--accent-gold);
+  text-align: center;
+}
+
+.racer-over-score {
+  font-size: 1.8rem;
+  color: #ff8c00;
+  font-weight: 800;
+}
+
+.racer-new-best {
+  font-size: 1.1rem;
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.racer-over-buttons {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+@media (max-width: 420px) {
+  .racer-hud-info span:nth-child(3) { display: none; }
+}
+
 

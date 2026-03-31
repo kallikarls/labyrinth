@@ -76,7 +76,7 @@ export const STRINGS = {
     tetrisNext:       'Næst',
     tetrisPlayAgain:  '🔄 Spila aftur',
     // Breakout
-    breakoutName:     'Breakout',
+    breakoutName:     'Múrbrjóturinn',
     breakoutDesc:     'Brjóttu múrinn með bolta',
     breakoutLevel:    'Stig',
     breakoutWin:      'Frábært! 🎉',
@@ -89,6 +89,12 @@ export const STRINGS = {
     siWave:           'Orusta búin! 🎉',
     siNextWave:       'Næsta orusta 🚀',
     siPlayAgain:      '🔄 Spila aftur',
+    // Racer
+    racerName:        'Akstur',
+    racerDesc:        'Hallaðu til að aka',
+    racerSubtitle:    'Hallaðu frám og að til að stýra hraða, hlídæmi til að beygja',
+    racerStart:       '🏎️ Aka!',
+    racerPlayAgain:   '🔄 Aka aftur',
     // Language toggle
     langLabel:        'EN',
   },
@@ -172,6 +178,12 @@ export const STRINGS = {
     siWave:           'Wave Clear! 🎉',
     siNextWave:       'Next Wave 🚀',
     siPlayAgain:      '🔄 Play Again',
+    // Racer
+    racerName:        'Road Racer',
+    racerDesc:        'Tilt to drive — how far can you go?',
+    racerSubtitle:    'Tilt forward/back = speed, left/right = steer',
+    racerStart:       '🏎️ Drive!',
+    racerPlayAgain:   '🔄 Drive Again',
     breakoutLevel:    'Level',
     breakoutWin:      'Amazing! 🎉',
     breakoutLaunch:   'Tap or press Space to launch!',
@@ -262,6 +274,10 @@ export function applyAll() {
   // Space Invaders home card
   _setText('siName',           t('siName'));
   _setText('siDesc',           t('siDesc'));
+
+  // Racer home card
+  _setText('racerName',        t('racerName'));
+  _setText('racerDesc',        t('racerDesc'));
 
   // Color Book
   _setText('galleryTitle',     t('colorBook'));
