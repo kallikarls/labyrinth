@@ -450,6 +450,10 @@ html, body {
 
 #homeScreen {
   background: linear-gradient(160deg, rgba(13,15,20,0.97) 0%, rgba(8,10,16,0.99) 100%);
+  justify-content: flex-start;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 24px 0 32px;
 }
 
 .home-content {
@@ -457,7 +461,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px;
+  gap: 20px;
 }
 
 .home-logo {
@@ -574,6 +578,24 @@ html, body {
   font-size: 0.85rem;
   color: var(--text-muted);
   font-weight: 500;
+}
+
+/* Compact cards on small phones */
+@media (max-height: 700px) {
+  .home-content { gap: 14px; }
+  .home-games   { gap: 9px; }
+  .game-card    { padding: 13px 18px; }
+  .game-card-icon { font-size: 1.9rem; }
+  .game-card-name { font-size: 1.05rem; }
+  .game-card-desc { font-size: 0.78rem; }
+  .home-logo    { gap: 2px; }
+}
+
+@media (max-height: 580px) {
+  .home-content { gap: 10px; padding: 12px 0 20px; }
+  .home-games   { gap: 7px; }
+  .game-card    { padding: 10px 14px; gap: 14px; }
+  .game-card-icon { font-size: 1.6rem; }
 }
 
 .labyrinth-card { border-color: rgba(245,200,66,0.5); }
