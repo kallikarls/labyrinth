@@ -90,11 +90,11 @@ export const STRINGS = {
     siNextWave:       'Næsta orusta 🚀',
     siPlayAgain:      '🔄 Spila aftur',
     // Racer
-    racerName:        'Akstur',
-    racerDesc:        'Hallaðu til að aka',
-    racerSubtitle:    'Hallaðu frám og að til að stýra hraða, hlídæmi til að beygja',
-    racerStart:       '🏎️ Aka!',
-    racerPlayAgain:   '🔄 Aka aftur',
+    racerName:        'Kappakstur',
+    racerDesc:        'Keyrðu eins og vindurinn!',
+    racerSubtitle:    'Hallaðu fram og aftur til að stýra hraða, til hliðar til að beygja',
+    racerStart:       '🏎️ Keyra!',
+    racerPlayAgain:   '🔄 Keyra aftur',
     // Language toggle
     langLabel:        'EN',
   },
