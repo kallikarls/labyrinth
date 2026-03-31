@@ -123,6 +123,8 @@ export class Racer {
         THREE = await import('https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js');
       } catch (e) { console.error('Three.js load failed', e); return; }
     }
+    // Defer until screen is painted so clientWidth/Height are non-zero
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
     if (!this._renderer) this._initScene();
     else this._onResize();
     this._showOverlay('start');
@@ -524,15 +526,17 @@ export class Racer {
     // Reset road
     this._worldGroup.position.set(0, 0, 0);
 
-    // Rebuild segments fresh with no curve at start
-    for (const s of this._segs) { s.angle = 0; s.curve = 0; s.x = 0; }
-    for (let i = 0; i < NUM_SEGS; i++) {
-      this._segs[i].z    = -i * SEG_LEN;
-      this._segs[i].x    = 0;
-      this._segs[i].angle = 0;
-      this._segs[i].curve = 0;
-      this._segPool[i].position.set(0, 0, -i * SEG_LEN);
-      this._segPool[i].rotation.y = 0;
+    // Rebuild segments fresh with no curve at start (only if already built)
+    if (this._segs.length > 0) {
+      for (const s of this._segs) { s.angle = 0; s.curve = 0; s.x = 0; }
+      for (let i = 0; i < NUM_SEGS; i++) {
+        this._segs[i].z    = -i * SEG_LEN;
+        this._segs[i].x    = 0;
+        this._segs[i].angle = 0;
+        this._segs[i].curve = 0;
+        this._segPool[i].position.set(0, 0, -i * SEG_LEN);
+        this._segPool[i].rotation.y = 0;
+      }
     }
 
     this._ui.overlay.style.display = 'none';
