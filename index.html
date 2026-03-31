@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Labyrinth" />
   <meta name="description" content="A fun tilt-to-play labyrinth ball game for kids. Tilt your device to roll the ball through the maze!" />
-  <title>Labyrinth — Tilt & Roll!</title>
+  <title>Leikjaland</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png" />
@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css" />
 </head>
 <body>
 
@@ -33,7 +34,7 @@
         <button id="btnLabyrinth" class="game-card labyrinth-card">
           <span class="game-card-icon">🌀</span>
           <div class="game-card-text">
-            <span class="game-card-name">Labyrinth</span>
+            <span id="labyrinthName" class="game-card-name">Völundarhús</span>
             <span id="labyrinthDesc" class="game-card-desc">Halltu til að rúlla boltanum í gegnum völundarhúsið</span>
           </div>
         </button>
@@ -41,29 +42,32 @@
           <span class="game-card-icon">🐍</span>
           <div class="game-card-text">
             <span class="game-card-name">Snake</span>
-            <span id="snakeDesc" class="game-card-desc">Klassískt Snake — borðaðu, vaxtu, hrapadu ekki</span>
+            <span id="snakeDesc" class="game-card-desc">Klassískur Snake — borðaðu og stækkaðu</span>
           </div>
         </button>
         <button id="btnColorBook" class="game-card colorbook-card">
           <span class="game-card-icon">🎨</span>
           <div class="game-card-text">
-            <span class="game-card-name">Color Book</span>
-            <span id="colorBookDesc" class="game-card-desc">Teiknaðu og litu skemmtilegar myndir</span>
+            <span id="colorBookName" class="game-card-name">Litabók</span>
+            <span id="colorBookDesc" class="game-card-desc">Teiknaðu og litaðu skemmtilegar myndir</span>
           </div>
         </button>
       </div>
-      <button id="btnLang" class="lang-btn">EN</button>
+      <div class="lang-switcher">
+        <button id="btnLangIS" class="lang-flag-btn active" title="Íslenska"><span class="fi fi-is"></span> Íslenska</button>
+        <button id="btnLangEN" class="lang-flag-btn" title="English"><span class="fi fi-gb"></span> English</button>
+      </div>
     </div>
   </div>
 
   <!-- LABYRINTH LEVEL SELECT -->
   <div id="startScreen" class="screen">
     <div class="screen-content">
-      <button id="btnAllGames" class="cb-back-btn" style="align-self:flex-start">← Allir leikir</button>
+      <button id="btnAllGames" class="hud-btn" aria-label="Heim" style="align-self:flex-start">🏠</button>
 
       <div class="logo-wrap">
         <div class="logo-ball"></div>
-        <h1 class="logo-title">Labyrinth</h1>
+        <h1 id="startScreenTitle" data-i18n="labyrinthName" class="logo-title">Völundarhús</h1>
         <p id="logoSub" class="logo-sub">Hallaðu til að rúlla! 🎉</p>
       </div>
 
@@ -99,7 +103,7 @@
   <div id="hud" class="screen">
     <div class="hud-top">
       <button id="btnHome" class="hud-btn" aria-label="Home">🏠</button>
-      <div class="hud-level-name" id="hudLevelName">Easy</div>
+      <div class="hud-level-name" id="hudLevelName"></div>
       <button id="btnMute" class="hud-btn" aria-label="Toggle sound">🔊</button>
     </div>
     <div class="hud-bottom">
@@ -116,7 +120,7 @@
       <div class="win-stars" id="winStars"></div>
       <div class="win-buttons">
         <button id="btnPlayAgain" class="win-btn primary">🔀 Nýr völundarhús</button>
-        <button id="btnGoHome" class="win-btn secondary">🏠 Heim</button>
+        <button id="btnGoHome" class="win-btn secondary" aria-label="Heim">🏠</button>
       </div>
     </div>
     <canvas id="confettiCanvas"></canvas>
@@ -130,7 +134,7 @@
   <!-- GALLERY SCREEN -->
   <div id="galleryScreen" class="screen cb-screen">
     <div class="cb-header">
-      <button id="btnGalleryBack" class="cb-back-btn">🏠 Heim</button>
+      <button id="btnGalleryBack" class="hud-btn" aria-label="Heim">🏠</button>
       <h2 id="galleryTitle" class="cb-title">🎨 Litabók</h2>
       <span></span>
     </div>
@@ -143,8 +147,8 @@
       <button id="btnColoringBack" class="cb-back-btn">← Til baka</button>
       <span class="cb-title" id="coloringTitle">Drawing</span>
       <div class="cb-header-actions">
-        <button id="btnColoringClear" class="cb-action-btn" title="Clear">🗑️</button>
-        <button id="btnColoringSave"  class="cb-action-btn" title="Save image">💾</button>
+        <button id="btnColoringClear" class="cb-action-btn" data-i18n-title="clearCanvas" title="Hætta við">🗑️</button>
+        <button id="btnColoringSave"  class="cb-action-btn" data-i18n-title="saveImage"   title="Vista mynd">💾</button>
       </div>
     </div>
     <div id="coloringCanvasWrap" class="coloring-canvas-wrap">
@@ -178,7 +182,7 @@
         <p id="snakeNewBest" class="snake-new-best">🎉 Nýtt met!</p>
         <div class="snake-over-buttons">
           <button id="btnSnakeRestart" class="win-btn primary">🔄 Spila aftur</button>
-          <button id="btnSnakeOverHome" class="win-btn secondary">🏠 Heim</button>
+          <button id="btnSnakeOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
         </div>
       </div>
     </div>

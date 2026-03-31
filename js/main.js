@@ -5,7 +5,7 @@
 import { Game }     from './game.js';
 import { Coloring } from './coloring/coloring.js';
 import { Snake }    from './snake.js';
-import { applyAll, toggleLang } from './i18n.js';
+import { applyAll, setLang } from './i18n.js';
 
 window.addEventListener('DOMContentLoaded', () => {
   // Apply persisted language on load
@@ -17,9 +17,12 @@ window.addEventListener('DOMContentLoaded', () => {
   game.start();
 
   document.getElementById('btnSnake').addEventListener('click', () => snake.open());
-  document.getElementById('btnLang').addEventListener('click', () => {
-    toggleLang();
-    // Refresh dynamic strings in game modules
+  document.getElementById('btnLangIS').addEventListener('click', () => {
+    setLang('is');
+    game._updateStarDisplay();
+  });
+  document.getElementById('btnLangEN').addEventListener('click', () => {
+    setLang('en');
     game._updateStarDisplay();
   });
 

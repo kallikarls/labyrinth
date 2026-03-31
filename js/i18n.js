@@ -8,26 +8,29 @@ const LANG_KEY = 'game_lang';
 export const STRINGS = {
   is: {
     // Home
-    homeTitle:        '🎮 Leikjamiðstöð',
+    homeTitle:        '🎮 Leikjaland',
+    pageTitle:         'Leikjaland',
     homeSub:          'Veldu leik!',
-    labyrinthDesc:    'Halltu til að rúlla boltanum í gegnum völundarhúsið',
-    snakeDesc:        'Klassískt Snake — borðaðu, vaxtu, hrapaðu ekki',
+    labyrinthName:    'Völundarhús',
+    labyrinthDesc:    'Stýrðu boltanum í gegnum völundarhús',
+    snakeDesc:        'Klassískt Snake — borðaðu og stækkaðu',
+    colorBookName:    'Litabók',
     colorBookDesc:    'Teiknaðu og litu skemmtilegar myndir',
     // Labyrinth level select
     allGames:         '← Allir leikir',
-    logoSub:          'Hallaðu til að rúlla! 🎉',
+    logoSub:          'Hallaðu tækinu til að rúlla! 🎉',
     chooseLevel:      'Veldu erfiðleikastig:',
     easy:             'Auðvelt',
     medium:           'Miðlungs',
     hard:             'Erfitt',
-    hintTilt:         'Halltu tækinu til að rúlla boltanum!',
-    hintKeys:         'Notaðu örvalykla eða WASD til að rúlla boltanum!',
+    hintTilt:         'Hallaðu tækinu til að rúlla boltanum!',
+    hintKeys:         'Notaðu örvalyklana eða WASD til að rúlla boltanum!',
     // HUD
-    newMaze:          '🔀 Nýr völundarhús',
+    newMaze:          '🔀 Nýtt völundarhús',
     // Win screen
     amazing:          'Frábært!',
-    foundExit:        'Þú fannst útganginn!',
-    playAgain:        '🔀 Nýr völundarhús',
+    foundExit:        'Þú komst alla leið!',
+    playAgain:        '🔀 Nýtt völundarhús',
     // Snake
     score:            'Stig',
     best:             'Best',
@@ -39,15 +42,43 @@ export const STRINGS = {
     colorBook:        '🎨 Litabók',
     coloringBack:     '← Til baka',
     galleryBack:      '🏠 Heim',
-    // Language toggle
+    goHome:           '🏠 Heim',
+    // Drawing names
+    drawing_blank:    'Tómt blað',
+    drawing_mandala:  'Mandala',
+    drawing_sun:      'Sól',
+    drawing_castle:   'Kastali',
+    drawing_space:    'Geimskip',
+    drawing_balloon:  'Loftbelgur',
+    drawing_racecar:  'Kappaksturssbíll',
+    drawing_plane:    'Flugvél',
+    drawing_robot:    'Vélmenni',
+    drawing_astro:    'Geimfari',
+    drawing_owl:      'Ugla',
+    drawing_dog:      'Hundur',    // Tools
+    tool_bucket:      'Fylla',
+    tool_brush:       'Bursti',
+    tool_pencil:      'Blýantur',
+    tool_spray:       'Spreybrúsi',
+    tool_eraser:      'Strokleður',
+    // Sizes
+    size_small:       'Lítið',
+    size_medium:      'Miðlungs',
+    size_large:       'Stórt',
+    // Coloring actions
+    clearCanvas:      'Hætta við',
+    saveImage:        'Vista mynd',    // Language toggle
     langLabel:        'EN',
   },
   en: {
     // Home
     homeTitle:        '🎮 Game Hub',
+    pageTitle:         'Game Hub',
     homeSub:          'Pick a game!',
+    labyrinthName:    'Labyrinth',
     labyrinthDesc:    'Tilt to roll the ball through the maze',
-    snakeDesc:        'Classic snake — eat, grow, don\'t crash',
+    snakeDesc:        "Classic snake — eat, grow, don't crash",
+    colorBookName:    'Color Book',
     colorBookDesc:    'Draw and color fun pictures',
     // Labyrinth level select
     allGames:         '← All Games',
@@ -75,6 +106,33 @@ export const STRINGS = {
     colorBook:        '🎨 Color Book',
     coloringBack:     '← Back',
     galleryBack:      '🏠 Home',
+    goHome:           '🏠 Home',
+    // Drawing names
+    drawing_blank:    'Blank Page',
+    drawing_mandala:  'Mandala',
+    drawing_sun:      'Sun Art',
+    drawing_castle:   'Castle',
+    drawing_space:    'Space',
+    drawing_balloon:  'Balloon',
+    drawing_racecar:  'Race Car',
+    drawing_plane:    'Airplane',
+    drawing_robot:    'Robot',
+    drawing_astro:    'Astronaut',
+    drawing_owl:      'Owl',
+    drawing_dog:      'Dog',
+    // Tools
+    tool_bucket:      'Fill',
+    tool_brush:       'Brush',
+    tool_pencil:      'Pencil',
+    tool_spray:       'Spray',
+    tool_eraser:      'Eraser',
+    // Sizes
+    size_small:       'Small',
+    size_medium:      'Medium',
+    size_large:       'Large',
+    // Coloring actions
+    clearCanvas:      'Clear',
+    saveImage:        'Save image',
     // Language toggle
     langLabel:        'IS',
   },
@@ -99,20 +157,24 @@ export function toggleLang() {
 export function applyAll() {
   const lang = _current;
   document.documentElement.lang = lang;
+  document.title = t('pageTitle');
 
-  // Toggle button label (shows what you'd switch TO)
-  const btn = document.getElementById('btnLang');
-  if (btn) btn.textContent = t('langLabel');
+  // Flag buttons — highlight active
+  const btnIS = document.getElementById('btnLangIS');
+  const btnEN = document.getElementById('btnLangEN');
+  if (btnIS) btnIS.classList.toggle('active', lang === 'is');
+  if (btnEN) btnEN.classList.toggle('active', lang === 'en');
 
   // Home
   _setText('homeTitle',      t('homeTitle'));
   _setText('homeSub',        t('homeSub'));
+  _setText('labyrinthName',  t('labyrinthName'));
   _setText('labyrinthDesc',  t('labyrinthDesc'));
   _setText('snakeDesc',      t('snakeDesc'));
+  _setText('colorBookName',  t('colorBookName'));
   _setText('colorBookDesc',  t('colorBookDesc'));
 
   // Labyrinth level select
-  _setText('btnAllGames',    t('allGames'));
   _setText('logoSub',        t('logoSub'));
   _setText('levelLabel',     t('chooseLevel'));
   _setText('easyName',       t('easy'));
@@ -124,10 +186,9 @@ export function applyAll() {
   _setText('btnNewMaze',  t('newMaze'));
 
   // Win screen
-  _setText('winTitle',    t('amazing'));
-  _setText('winSub',      t('foundExit'));
+  _setText('winTitle',      t('amazing'));
+  _setText('winSub',        t('foundExit'));
   _setText('btnPlayAgain',  t('playAgain'));
-  _setText('btnGoHome',     '🏠 ' + (lang === 'is' ? 'Heim' : 'Home'));
 
   // Snake HUD
   const scoreEl = document.getElementById('snakeScore');
@@ -142,15 +203,18 @@ export function applyAll() {
   }
 
   // Snake overlay
-  _setText('snakeOverTitle', t('gameOver'));
-  _setText('snakeNewBest',   t('newBest'));
-  _setText('btnSnakeRestart', t('snakePlayAgain'));
-  _setText('btnSnakeOverHome', '🏠 ' + (lang === 'is' ? 'Heim' : 'Home'));
+  _setText('snakeOverTitle',   t('gameOver'));
+  _setText('snakeNewBest',     t('newBest'));
+  _setText('btnSnakeRestart',  t('snakePlayAgain'));
 
   // Color Book
   _setText('galleryTitle',     t('colorBook'));
-  _setText('btnGalleryBack',   t('galleryBack'));
   _setText('btnColoringBack',  t('coloringBack'));
+
+  // data-i18n-title: update title attribute for any element that has it
+  document.querySelectorAll('[data-i18n-title]').forEach(el => {
+    el.title = t(el.dataset.i18nTitle);
+  });
 }
 
 function _setText(id, text) {

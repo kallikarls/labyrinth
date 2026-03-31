@@ -111,7 +111,7 @@ export class Game {
 
     this._buildMaze();
     this._showScreen(STATE.PLAYING);
-    this._ui.hudLevel.textContent = cfg.name;
+    this._ui.hudLevel.textContent = t(levelKey);
     this._ui.hudLevel.style.color = cfg.color;
     this.state = STATE.PLAYING;
     this._winCooldown = 120; // frames to wait before win detection (prevent instant win)

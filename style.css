@@ -1,6 +1,6 @@
 /* =====================================================
    LABYRINTH GAME — style.css
-   Classic wooden board theme, kid-friendly UI
+   Modern dark theme
    ===================================================== */
 
 /* ── Reset & Base ── */
@@ -14,12 +14,12 @@
 :root {
   --font: 'Outfit', sans-serif;
 
-  /* Wood palette */
-  --wood-dark:    #3d2005;
-  --wood-mid:     #6b3a1f;
-  --wood-light:   #a0622e;
-  --wood-pale:    #c8895a;
-  --wood-grain:   #8b4d1e;
+  /* Dark base palette */
+  --bg-darkest:   #0d0f14;
+  --bg-dark:      #13161e;
+  --bg-mid:       #1a1e2a;
+  --bg-light:     #222736;
+  --text-muted:   #8892aa;
 
   /* Ball */
   --ball-shine:   #f0f0f0;
@@ -38,21 +38,21 @@
   --hard-clr:   #e85454;
 
   /* UI Glass */
-  --glass-bg:   rgba(61,32,5,0.82);
-  --glass-border: rgba(200,137,90,0.35);
+  --glass-bg:     rgba(13,15,20,0.85);
+  --glass-border: rgba(100,120,180,0.25);
 
   --radius-lg: 24px;
   --radius-md: 16px;
   --radius-sm: 12px;
-  --shadow-lg: 0 8px 40px rgba(0,0,0,0.55);
-  --shadow-md: 0 4px 20px rgba(0,0,0,0.40);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.7);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.55);
 }
 
 html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: var(--wood-dark);
+  background: var(--bg-darkest);
   font-family: var(--font);
   touch-action: none;
   -webkit-user-select: none;
@@ -89,7 +89,7 @@ html, body {
 
 /* ── Start Screen ── */
 #startScreen {
-  background: linear-gradient(160deg, rgba(61,32,5,0.96) 0%, rgba(40,18,2,0.98) 100%);
+  background: linear-gradient(160deg, rgba(13,15,20,0.97) 0%, rgba(8,10,16,0.99) 100%);
 }
 
 .screen-content {
@@ -132,7 +132,7 @@ html, body {
 
 .logo-sub {
   font-size: clamp(1rem, 4vw, 1.3rem);
-  color: var(--wood-pale);
+  color: var(--text-muted);
   font-weight: 600;
 }
 
@@ -145,7 +145,7 @@ html, body {
   text-align: center;
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--wood-pale);
+  color: var(--text-muted);
   margin-bottom: 16px;
   letter-spacing: 0.5px;
 }
@@ -203,7 +203,7 @@ html, body {
 
 .level-desc {
   font-size: 0.78rem;
-  color: var(--wood-pale);
+  color: var(--text-muted);
   font-weight: 600;
 }
 
@@ -215,7 +215,7 @@ html, body {
 
 .hint-text {
   font-size: 0.95rem;
-  color: var(--wood-pale);
+  color: var(--text-muted);
   text-align: center;
   font-weight: 500;
   opacity: 0.8;
@@ -314,7 +314,7 @@ html, body {
 
 /* ── Win Screen ── */
 #winScreen {
-  background: linear-gradient(160deg, rgba(20,10,2,0.92) 0%, rgba(40,20,5,0.96) 100%);
+  background: linear-gradient(160deg, rgba(8,10,16,0.95) 0%, rgba(13,15,20,0.97) 100%);
   z-index: 30;
 }
 
@@ -355,7 +355,7 @@ html, body {
 
 .win-sub {
   font-size: clamp(1rem, 4vw, 1.3rem);
-  color: var(--wood-pale);
+  color: var(--text-muted);
   font-weight: 600;
   text-align: center;
 }
@@ -399,7 +399,7 @@ html, body {
 .win-btn.secondary {
   background: var(--glass-bg);
   border: 2px solid var(--glass-border);
-  color: var(--wood-pale);
+  color: var(--text-muted);
 }
 
 .win-btn:hover, .win-btn:active {
@@ -414,7 +414,7 @@ html, body {
   left: 50%;
   transform: translateX(-50%);
   background: rgba(0,0,0,0.6);
-  color: var(--wood-pale);
+  color: var(--text-muted);
   font-size: 0.8rem;
   font-weight: 600;
   padding: 8px 18px;
@@ -449,7 +449,7 @@ html, body {
    ══════════════════════════════════════════════════════ */
 
 #homeScreen {
-  background: linear-gradient(160deg, rgba(61,32,5,0.96) 0%, rgba(40,18,2,0.98) 100%);
+  background: linear-gradient(160deg, rgba(13,15,20,0.97) 0%, rgba(8,10,16,0.99) 100%);
 }
 
 .home-content {
@@ -477,7 +477,7 @@ html, body {
 
 .home-sub {
   font-size: clamp(0.95rem, 3.5vw, 1.2rem);
-  color: var(--wood-pale);
+  color: var(--text-muted);
   font-weight: 600;
 }
 
@@ -488,25 +488,47 @@ html, body {
   gap: 14px;
 }
 
-.lang-btn {
+.lang-switcher {
+  display: flex;
+  gap: 10px;
   margin-top: 4px;
-  padding: 8px 22px;
+}
+
+.lang-flag-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
   border-radius: 999px;
   border: 2px solid var(--glass-border);
   background: var(--glass-bg);
-  color: var(--accent-gold);
+  color: var(--text-muted);
   font-family: var(--font);
   font-size: 0.95rem;
-  font-weight: 800;
-  letter-spacing: 1px;
+  font-weight: 700;
   cursor: pointer;
-  transition: transform 0.16s, box-shadow 0.16s;
+  transition: transform 0.16s, box-shadow 0.16s, border-color 0.16s, color 0.16s;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
-.lang-btn:hover, .lang-btn:active {
-  transform: scale(1.08);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+
+.lang-flag-btn .fi {
+  width: 1.4em;
+  height: 1.4em;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.lang-flag-btn.active {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  box-shadow: 0 0 12px rgba(245,200,66,0.3);
+}
+
+.lang-flag-btn:hover, .lang-flag-btn:active {
+  transform: scale(1.05);
 }
 
 .game-card {
@@ -550,7 +572,7 @@ html, body {
 
 .game-card-desc {
   font-size: 0.85rem;
-  color: var(--wood-pale);
+  color: var(--text-muted);
   font-weight: 500;
 }
 
@@ -586,7 +608,7 @@ html, body {
   padding: 16px 24px;
   border-radius: var(--radius-md);
   border: 2px solid rgba(62,207,110,0.45);
-  background: linear-gradient(135deg, rgba(20,80,20,0.30) 0%, rgba(62,207,110,0.18) 100%);
+  background: linear-gradient(135deg, rgba(62,207,110,0.12) 0%, rgba(62,207,110,0.08) 100%);
   color: #fff;
   font-family: var(--font);
   font-size: 1.15rem;
@@ -621,11 +643,16 @@ html, body {
 
 /* Shared coloring screens */
 .cb-screen {
+  background: var(--bg-light);
+  z-index: 15;
+}
+
+/* Override .screen centering — stack header + content vertically */
+#galleryScreen,
+#coloringScreen {
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
-  background: #f5f0e8;
-  z-index: 15;
   overflow: hidden;
 }
 
@@ -634,8 +661,7 @@ html, body {
   align-items: center;
   justify-content: space-between;
   padding: 10px 14px;
-  background: #3d2005;
-  flex-shrink: 0;
+  background: var(--bg-darkest);
   gap: 8px;
 }
 
@@ -679,12 +705,13 @@ html, body {
 /* Gallery */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(140px, 28vw), 1fr));
   gap: 16px;
   padding: 20px;
-  overflow-y: auto;
   align-content: start;
+  overflow-y: auto;
   flex: 1;
+  min-height: 0;
 }
 
 .gallery-card {
@@ -692,7 +719,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  background: #fff;
+  background: var(--bg-mid);
   border-radius: var(--radius-md);
   padding: 12px;
   cursor: pointer;
@@ -705,35 +732,39 @@ html, body {
   box-shadow: 0 10px 28px rgba(0,0,0,0.18);
   border-color: var(--accent-gold);
 }
-.gallery-card canvas { border-radius: 8px; background: #fafaf2; }
+.gallery-card canvas { border-radius: 8px; background: #f0f2f5; }
 .gallery-label {
   font-family: var(--font);
   font-weight: 700;
   font-size: 0.95rem;
-  color: #3d2005;
+  color: var(--text-muted);
 }
 
 /* Coloring screen layout */
 .coloring-canvas-wrap {
   flex: 1;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   padding: 8px;
-  background: #e8e0d0;
+  background: var(--bg-dark);
 }
 
 .coloring-canvas-wrap canvas {
+  max-width: 100%;
+  max-height: 100%;
   border-radius: 12px;
   box-shadow: 0 6px 28px rgba(0,0,0,0.22);
   cursor: crosshair;
   touch-action: none;
+  display: block;
 }
 
 /* Tools panel */
 .coloring-panel {
-  background: #2e1506;
+  background: var(--bg-darkest);
   padding: 10px 12px;
   flex-shrink: 0;
   display: flex;
@@ -789,13 +820,17 @@ html, body {
 .size-btn:hover  { background: rgba(255,255,255,0.18); }
 .size-btn.active { border-color: var(--accent-gold); background: rgba(245,200,66,0.2); }
 
-/* Color palette */
+/* Color palette — single scrollable row on mobile */
 .palette-grid {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 6px;
-  justify-content: center;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.palette-grid::-webkit-scrollbar { display: none; }
 
 .color-swatch {
   width: 36px; height: 36px;
@@ -812,29 +847,32 @@ html, body {
   box-shadow: 0 0 0 2px var(--accent-gold);
 }
 
-/* Landscape tablet: move panel to the right */
+/* Landscape tablet: canvas left, panel right, header spans full width */
 @media (min-aspect-ratio: 4/3) and (min-width: 768px) {
   #coloringScreen {
-    flex-direction: row;
+    display: grid !important;
+    grid-template-columns: 1fr 200px;
+    grid-template-rows: auto 1fr;
+    flex-direction: unset;
   }
-  .cb-header {
-    position: absolute; top: 0; left: 0; right: 0;
-    z-index: 2;
+  #coloringScreen .cb-header {
+    grid-column: 1 / -1;
+    grid-row: 1;
   }
-  .coloring-canvas-wrap {
-    flex: 1;
-    padding-top: 60px;
+  #coloringScreen .coloring-canvas-wrap {
+    grid-column: 1;
+    grid-row: 2;
+    min-height: 0;
   }
-  .coloring-panel {
-    width: 200px;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-top: 70px;
+  #coloringScreen .coloring-panel {
+    grid-column: 2;
+    grid-row: 2;
     overflow-y: auto;
+    overflow-x: hidden;
   }
   .panel-row   { flex-direction: column; align-items: flex-start; }
   .tools-row   { flex-wrap: wrap; }
-  .palette-grid { justify-content: flex-start; }
+  .palette-grid { flex-wrap: wrap; overflow-x: unset; }
 }
 
 /* ══════════════════════════════════════════════════════

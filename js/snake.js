@@ -19,6 +19,8 @@ function rrect(ctx, x, y, w, h, r) {
 }
 
 // Polyfill-safe rounded rectangle helper
+
+export class Snake {
   constructor() {
     this._canvas = document.getElementById('snakeCanvas');
     this._ctx    = this._canvas.getContext('2d');
@@ -191,7 +193,7 @@ function rrect(ctx, x, y, w, h, r) {
     ctx.fillRect(0, 0, W, H);
 
     // Subtle grid
-    ctx.strokeStyle = 'rgba(62,207,110,0.07)';
+    ctx.strokeStyle = 'rgba(62,207,110,0.22)';
     ctx.lineWidth   = 0.5;
     for (let x = 0; x <= W; x += C) {
       ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();

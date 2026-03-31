@@ -10,6 +10,7 @@
  */
 
 import { DRAWINGS } from './drawings.js';
+import { t }        from '../i18n.js';
 
 const PALETTE = [
   '#FF0000','#FF5500','#FF9900','#FFCC00','#FFFF00','#CCFF00',
@@ -70,7 +71,7 @@ export class Coloring {
       card.appendChild(thumb);
       const label = document.createElement('div');
       label.className = 'gallery-label';
-      label.textContent = `${d.emoji} ${d.name}`;
+      label.textContent = `${d.emoji} ${t('drawing_' + d.id)}`;
       card.appendChild(label);
       card.addEventListener('click', () => this.openDrawing(d.id));
       grid.appendChild(card);
@@ -84,13 +85,14 @@ export class Coloring {
     if (!this.currentDrawing) return;
 
     document.getElementById('coloringTitle').textContent =
-      `${this.currentDrawing.emoji} ${this.currentDrawing.name}`;
+      `${this.currentDrawing.emoji} ${t('drawing_' + this.currentDrawing.id)}`;
 
     // Show coloring screen
     document.getElementById('galleryScreen').classList.remove('active');
     document.getElementById('coloringScreen').classList.add('active');
 
-    this._initCanvases();
+    // Defer sizing until after the browser has computed layout for the now-visible screen
+    requestAnimationFrame(() => requestAnimationFrame(() => this._initCanvases()));
   }
 
   _initCanvases() {
@@ -356,12 +358,13 @@ export class Coloring {
 
   _buildToolButtons() {
     const row = document.getElementById('toolsRow');
-    Object.entries(TOOLS).forEach(([key, t]) => {
+    Object.entries(TOOLS).forEach(([key, tool]) => {
       const btn = document.createElement('button');
       btn.className = 'tool-btn' + (key === 'bucket' ? ' active' : '');
       btn.id = `tool_${key}`;
-      btn.title = t.label;
-      btn.textContent = t.icon;
+      btn.dataset.i18nTitle = 'tool_' + key;
+      btn.title = t('tool_' + key);
+      btn.textContent = tool.icon;
       btn.addEventListener('click', () => {
         document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -377,7 +380,8 @@ export class Coloring {
       const btn = document.createElement('button');
       btn.className = 'size-btn' + (key === 'medium' ? ' active' : '');
       btn.setAttribute('data-size', key);
-      btn.title = key;
+      btn.dataset.i18nTitle = 'size_' + key;
+      btn.title = t('size_' + key);
       const dot = document.createElement('span');
       dot.style.cssText = `display:inline-block;width:${val}px;height:${val}px;border-radius:50%;background:currentColor;`;
       btn.appendChild(dot);
