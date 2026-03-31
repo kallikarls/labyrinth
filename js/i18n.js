@@ -15,7 +15,7 @@ export const STRINGS = {
     labyrinthDesc:    'Stýrðu boltanum í gegnum völundarhús',
     snakeDesc:        'Klassískt Snake — borðaðu og stækkaðu',
     colorBookName:    'Litabók',
-    colorBookDesc:    'Teiknaðu og litu skemmtilegar myndir',
+    colorBookDesc:    'Teiknaðu og litaðu skemmtilegar myndir',
     // Labyrinth level select
     allGames:         '← Allir leikir',
     logoSub:          'Hallaðu tækinu til að rúlla! 🎉',
