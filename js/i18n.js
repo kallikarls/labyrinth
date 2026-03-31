@@ -96,8 +96,8 @@ export const STRINGS = {
     racerStart:       '🏎️ Keyra!',
     racerPlayAgain:   '🔄 Keyra aftur',
     // Solitaire
-    solName:          'Solitaire',
-    solDesc:          'Dragðu og raðaðu öllum kortum á grunninn',
+    solName:          'Kapallinn',
+    solDesc:          'Dragðu og raðaðu öllum spilunum saman eftir tegund',
     solStart:         '🃏 Spila!',
     solPlayAgain:     '🔄 Spila aftur',
     solWin:           'Sigur! 🎉',
