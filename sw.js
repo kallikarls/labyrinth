@@ -2,7 +2,7 @@
  * sw.js — Service Worker for offline PWA caching
  */
 
-const CACHE_NAME = 'labyrinth-v10';
+const CACHE_NAME = 'labyrinth-v11';
 const ASSETS = [
   './',
   './index.html',
@@ -19,7 +19,6 @@ const ASSETS = [
   './js/tetris.js',
   './js/breakout.js',
   './js/spaceinvaders.js',
-  './js/pingpong.js',
   './js/i18n.js',
   './manifest.json',
   './icons/icon-32.png',
