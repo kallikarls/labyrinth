@@ -91,10 +91,17 @@ export const STRINGS = {
     siPlayAgain:      '🔄 Spila aftur',
     // Racer
     racerName:        'Kappakstur',
-    racerDesc:        'Keyrðu eins og vindurinn!',
+    racerDesc:        'Keyrðu eins og vindurinn - hvað kemstu langt?',
     racerSubtitle:    'Hallaðu fram og aftur til að stýra hraða, til hliðar til að beygja',
     racerStart:       '🏎️ Keyra!',
     racerPlayAgain:   '🔄 Keyra aftur',
+    // Solitaire
+    solName:          'Solitaire',
+    solDesc:          'Dragðu og raðaðu öllum kortum á grunninn',
+    solStart:         '🃏 Spila!',
+    solPlayAgain:     '🔄 Spila aftur',
+    solWin:           'Sigur! 🎉',
+    solMoves:         'færslur',
     // Language toggle
     langLabel:        'EN',
   },
@@ -184,6 +191,13 @@ export const STRINGS = {
     racerSubtitle:    'Tilt forward/back = speed, left/right = steer',
     racerStart:       '🏎️ Drive!',
     racerPlayAgain:   '🔄 Drive Again',
+    // Solitaire
+    solName:          'Solitaire',
+    solDesc:          'Drag cards to stack them all on the foundations',
+    solStart:         '🃏 Deal!',
+    solPlayAgain:     '🔄 Deal Again',
+    solWin:           'You won! 🎉',
+    solMoves:         'moves',
     breakoutLevel:    'Level',
     breakoutWin:      'Amazing! 🎉',
     breakoutLaunch:   'Tap or press Space to launch!',
@@ -278,6 +292,10 @@ export function applyAll() {
   // Racer home card
   _setText('racerName',        t('racerName'));
   _setText('racerDesc',        t('racerDesc'));
+
+  // Solitaire home card
+  _setText('solName',          t('solName'));
+  _setText('solDesc',          t('solDesc'));
 
   // Color Book
   _setText('galleryTitle',     t('colorBook'));

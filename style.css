@@ -1437,4 +1437,239 @@ html, body {
   .racer-hud-info span:nth-child(3) { display: none; }
 }
 
+/* ══════════════════════════════════════════════════════
+   SOLITAIRE
+   ══════════════════════════════════════════════════════ */
+
+:root {
+  --sol-card-bg:    #fff;
+  --sol-card-back:  #1a4fa0;
+  --sol-card-radius: 6px;
+  --sol-red:        #cc2222;
+  --sol-black:      #111;
+  --sol-accent:     #2ecc71;
+}
+
+.sol-card { border-color: rgba(46,204,113,0.5); }
+.sol-card:hover { box-shadow: 0 8px 32px rgba(46,204,113,0.3); }
+.sol-card .game-card-name { color: #2ecc71; }
+
+/* ── Screen ── */
+.sol-screen {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #0d5e2a;
+}
+
+/* ── HUD ── */
+.sol-hud {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(46,204,113,0.35);
+  z-index: 5;
+}
+
+.sol-hud-info {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.sol-hud-info span {
+  color: #2ecc71;
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+/* ── Board ── */
+.sol-board {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 8px 6px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Top row & tableau row ── */
+.sol-top-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.sol-spacer { /* fills middle gap between waste and foundations */ }
+
+.sol-tab-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  flex: 1;
+}
+
+/* ── Pile slot ── */
+.sol-pile {
+  position: relative;
+  aspect-ratio: 5/7;
+  border-radius: var(--sol-card-radius);
+  border: 2px dashed rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.18);
+  cursor: pointer;
+  overflow: visible;
+}
+
+.sol-pile-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  color: rgba(255,255,255,0.35);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* tableau piles grow to hold stacked cards */
+.sol-tab {
+  aspect-ratio: unset;
+  min-height: calc(100vw / 7 * 1.4);
+  overflow: visible;
+}
+
+/* ── Card face ── */
+.sol-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5/7;
+  background: var(--sol-card-bg);
+  border-radius: var(--sol-card-radius);
+  border: 1.5px solid #bbb;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2px 3px;
+  user-select: none;
+  cursor: grab;
+  box-sizing: border-box;
+  /* override .sol-card (home card) */
+  color: unset;
+  font-size: unset;
+}
+
+.sol-card:active { cursor: grabbing; }
+
+.sol-card.sol-red { color: var(--sol-red); }
+.sol-card.sol-black { color: var(--sol-black); }
+
+.sol-card-back {
+  background: var(--sol-card-back);
+  cursor: default;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.06) 0px,
+    rgba(255,255,255,0.06) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+}
+
+.sol-card-rank-top {
+  font-size: clamp(0.48rem, 1.5vw, 0.78rem);
+  font-weight: 800;
+  line-height: 1;
+  align-self: flex-start;
+}
+
+.sol-card-suit-mid {
+  font-size: clamp(0.8rem, 2.5vw, 1.4rem);
+  text-align: center;
+  align-self: center;
+  line-height: 1;
+}
+
+.sol-card-rank-bot {
+  font-size: clamp(0.48rem, 1.5vw, 0.78rem);
+  font-weight: 800;
+  line-height: 1;
+  align-self: flex-end;
+  transform: rotate(180deg);
+}
+
+/* ── Drag ghost ── */
+.sol-drag-ghost {
+  position: fixed;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.sol-drag-ghost .sol-card {
+  position: absolute;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.55);
+}
+
+/* ── Overlay ── */
+.sol-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.72);
+  z-index: 10;
+}
+
+.sol-over-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: var(--glass-bg);
+  border: 2px solid rgba(46,204,113,0.45);
+  border-radius: var(--radius-lg);
+  padding: 32px 40px;
+  box-shadow: var(--shadow-lg);
+  width: min(92vw, 360px);
+}
+
+.sol-over-emoji { font-size: 3rem; }
+
+.sol-over-title {
+  font-size: clamp(1.6rem, 6vw, 2.4rem);
+  font-weight: 900;
+  color: #2ecc71;
+  text-align: center;
+}
+
+.sol-over-score {
+  font-size: 1rem;
+  color: #aaa;
+  text-align: center;
+}
+
+.sol-new-best {
+  font-size: 1.1rem;
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.sol-over-buttons {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+@media (max-width: 380px) {
+  .sol-hud-info span:last-child { display: none; }
+}
 

@@ -80,6 +80,13 @@
             <span id="racerDesc" class="game-card-desc">Hallaðu til að aka</span>
           </div>
         </button>
+        <button id="btnSolitaire" class="game-card sol-card">
+          <span class="game-card-icon">🃏</span>
+          <div class="game-card-text">
+            <span id="solName" class="game-card-name">Solitaire</span>
+            <span id="solDesc" class="game-card-desc">Dragðu og raðaðu öllum kortum</span>
+          </div>
+        </button>
 
       </div>
       <div class="lang-switcher">
@@ -323,6 +330,32 @@
         <div class="si-over-buttons">
           <button id="btnSIRestart" class="win-btn primary">🔄 Spila aftur</button>
           <button id="btnSIOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOLITAIRE SCREEN -->
+  <div id="solScreen" class="screen sol-screen">
+    <div class="sol-hud">
+      <button id="btnSolHome" class="hud-btn" aria-label="Heim">🏠</button>
+      <div class="sol-hud-info">
+        <span id="solTimer">00:00</span>
+        <span id="solMoves">0 færslur</span>
+        <span id="solBest">Best: --:--</span>
+      </div>
+      <button id="btnSolUndo" class="hud-btn" aria-label="Afturkalla">↩</button>
+    </div>
+    <div id="solBoard" class="sol-board"></div>
+    <div id="solOverlay" class="sol-overlay" style="display:none">
+      <div class="sol-over-content">
+        <div class="sol-over-emoji">🃏</div>
+        <h2 id="solOverTitle" class="sol-over-title">Solitaire</h2>
+        <p id="solOverSub" class="sol-over-score">Dragðu og raðaðu öllum kortum</p>
+        <p id="solNewBest" class="sol-new-best" style="display:none">🎉 Nýtt met!</p>
+        <div class="sol-over-buttons">
+          <button id="btnSolStart" class="win-btn primary">🃏 Spila!</button>
+          <button id="btnSolOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
         </div>
       </div>
     </div>

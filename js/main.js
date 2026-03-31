@@ -9,6 +9,7 @@ import { Tetris }   from './tetris.js';
 import { Breakout }       from './breakout.js';
 import { SpaceInvaders }  from './spaceinvaders.js';
 import { Racer }          from './racer.js';
+import { Solitaire }      from './solitaire.js';
 import { applyAll, setLang } from './i18n.js';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -22,6 +23,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const breakout       = new Breakout();
   const spaceInvaders  = new SpaceInvaders();
   const racer          = new Racer();
+  const solitaire      = new Solitaire();
   game.start();
 
   document.getElementById('btnSnake').addEventListener('click', () => snake.open());
@@ -29,6 +31,7 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btnBreakout').addEventListener('click', () => breakout.open());
   document.getElementById('btnSpaceInvaders').addEventListener('click', () => spaceInvaders.open());
   document.getElementById('btnRacer').addEventListener('click', () => racer.open());
+  document.getElementById('btnSolitaire').addEventListener('click', () => solitaire.open());
   document.getElementById('btnLangIS').addEventListener('click', () => {
     setLang('is');
     game._updateStarDisplay();
