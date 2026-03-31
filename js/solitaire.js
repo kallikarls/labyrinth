@@ -274,10 +274,11 @@ export class Solitaire {
     });
   }
 
-  // Card offset helpers — responsive to card height
-  _cardH()         { return this._ui.board.clientWidth / 9.2; }
-  _faceUpOffset()  { return this._cardH() * 0.38; }
-  _faceDownOffset(){ return this._cardH() * 0.18; }
+  // Card offset helpers — use actual column width for accurate pixel offsets
+  _colW()          { return this._tabEls[0]?.clientWidth || ((this._ui.board.clientWidth - 36) / 7); }
+  _cardH()         { return this._colW() * 1.4; }   // aspect ratio 5:7
+  _faceUpOffset()  { return this._cardH() * 0.45; } // exposed click strip per face-up card
+  _faceDownOffset(){ return this._cardH() * 0.22; } // tight strip for face-down
 
   // ── Card element factory ──────────────────────────────────────────────────
 
@@ -368,12 +369,13 @@ export class Solitaire {
     // Cards being dragged = from idx to end of pile
     const cards = pile.slice(idx);
 
-    // Build ghost element
+    // Build ghost element — sized to match an actual column card
     const ghost = document.createElement('div');
     ghost.className = 'sol-drag-ghost';
     const CH  = this._cardH();
+    const colW = this._colW();
     const off = this._faceUpOffset();
-    ghost.style.width  = `${CH * 0.72}px`;
+    ghost.style.width  = `${colW}px`;
     ghost.style.height = `${CH + off * (cards.length - 1)}px`;
 
     cards.forEach((c, i) => {
@@ -385,7 +387,7 @@ export class Solitaire {
     });
 
     const pt = this._eventPoint(e);
-    ghost.style.left = `${pt.x - CH * 0.36}px`;
+    ghost.style.left = `${pt.x - colW / 2}px`;
     ghost.style.top  = `${pt.y - CH * 0.15}px`;
     document.body.appendChild(ghost);
 
@@ -404,9 +406,10 @@ export class Solitaire {
   _dragMove(e) {
     if (!this._drag) return;
     e.preventDefault();
-    const pt = this._eventPoint(e);
-    const CH = this._cardH();
-    this._drag.ghost.style.left = `${pt.x - CH * 0.36}px`;
+    const pt   = this._eventPoint(e);
+    const colW = this._colW();
+    const CH   = this._cardH();
+    this._drag.ghost.style.left = `${pt.x - colW / 2}px`;
     this._drag.ghost.style.top  = `${pt.y - CH * 0.15}px`;
   }
 

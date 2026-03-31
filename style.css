@@ -1460,6 +1460,8 @@ html, body {
   flex-direction: column;
   overflow: hidden;
   background: #0d5e2a;
+  align-items: stretch;       /* override base .screen { align-items: center } */
+  justify-content: flex-start;
 }
 
 /* ── HUD ── */
