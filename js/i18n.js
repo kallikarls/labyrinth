@@ -77,11 +77,18 @@ export const STRINGS = {
     tetrisPlayAgain:  '🔄 Spila aftur',
     // Breakout
     breakoutName:     'Breakout',
-    breakoutDesc:     'Brotnaðu í gegnum kubba með bolta',
+    breakoutDesc:     'Brjóttu múrinn með bolta',
     breakoutLevel:    'Stig',
     breakoutWin:      'Frábært! 🎉',
-    breakoutLaunch:   'Stryktú eða smelltu til að skjota!',
+    breakoutLaunch:   'Strjúktu eða smelltu til að skjóta!',
     breakoutPlayAgain:'  🔄 Spila aftur',
+    // Space Invaders
+    siName:           'Geimárás',
+    siDesc:           'Skjóttu geimverur áður en þær ná til þín',
+    siWaveLabel:      'Orusta',
+    siWave:           'Orusta búin! 🎉',
+    siNextWave:       'Næsta orusta 🚀',
+    siPlayAgain:      '🔄 Spila aftur',
     // Language toggle
     langLabel:        'EN',
   },
@@ -158,6 +165,13 @@ export const STRINGS = {
     // Breakout
     breakoutName:     'Breakout',
     breakoutDesc:     'Smash the bricks with the ball',
+    // Space Invaders
+    siName:           'Space Invaders',
+    siDesc:           'Shoot the aliens before they reach you',
+    siWaveLabel:      'Wave',
+    siWave:           'Wave Clear! 🎉',
+    siNextWave:       'Next Wave 🚀',
+    siPlayAgain:      '🔄 Play Again',
     breakoutLevel:    'Level',
     breakoutWin:      'Amazing! 🎉',
     breakoutLaunch:   'Tap or press Space to launch!',
@@ -244,6 +258,10 @@ export function applyAll() {
   // Breakout home card
   _setText('breakoutName',     t('breakoutName'));
   _setText('breakoutDesc',     t('breakoutDesc'));
+
+  // Space Invaders home card
+  _setText('siName',           t('siName'));
+  _setText('siDesc',           t('siDesc'));
 
   // Color Book
   _setText('galleryTitle',     t('colorBook'));

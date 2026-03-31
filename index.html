@@ -66,6 +66,13 @@
             <span id="breakoutDesc" class="game-card-desc">Brotnaðu í gegnum kubba með bolta</span>
           </div>
         </button>
+        <button id="btnSpaceInvaders" class="game-card si-card">
+          <span class="game-card-icon">👾</span>
+          <div class="game-card-text">
+            <span id="siName" class="game-card-name">Space Invaders</span>
+            <span id="siDesc" class="game-card-desc">Skjóttu geimverunum</span>
+          </div>
+        </button>
       </div>
       <div class="lang-switcher">
         <button id="btnLangIS" class="lang-flag-btn active" title="Íslenska"><span class="fi fi-is"></span> Íslenska</button>
@@ -255,6 +262,33 @@
         <div class="breakout-over-buttons">
           <button id="btnBreakoutRestart" class="win-btn primary">🔄 Spila aftur</button>
           <button id="btnBreakoutOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPACE INVADERS SCREEN -->
+  <div id="siScreen" class="screen si-screen">
+    <canvas id="siCanvas"></canvas>
+    <div class="si-hud">
+      <button id="btnSIHome" class="hud-btn" aria-label="Heim">🏠</button>
+      <div class="si-hud-info">
+        <span id="siScore">Stig: 0</span>
+        <span id="siLevel">Bylgja: 1</span>
+        <span id="siLives">🚀🚀🚀</span>
+        <span id="siBest">Best: 0</span>
+      </div>
+      <button id="btnSIPause" class="hud-btn" aria-label="Pasa">⏸</button>
+    </div>
+    <div id="siOverlay" class="si-overlay" style="display:none">
+      <div class="si-over-content">
+        <div class="si-over-emoji">👾</div>
+        <h2 id="siOverTitle" class="si-over-title">Leik lokið!</h2>
+        <p id="siFinalScore" class="si-over-score">0</p>
+        <p id="siNewBest" class="si-new-best">🎉 Nýtt met!</p>
+        <div class="si-over-buttons">
+          <button id="btnSIRestart" class="win-btn primary">🔄 Spila aftur</button>
+          <button id="btnSIOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
         </div>
       </div>
     </div>
