@@ -1548,7 +1548,7 @@ html, body {
 }
 
 /* ── Card face ── */
-.sol-card {
+.sol-face-card {
   position: relative;
   width: 100%;
   aspect-ratio: 5/7;
@@ -1568,10 +1568,10 @@ html, body {
   font-size: unset;
 }
 
-.sol-card:active { cursor: grabbing; }
+.sol-face-card:active { cursor: grabbing; }
 
-.sol-card.sol-red { color: var(--sol-red); }
-.sol-card.sol-black { color: var(--sol-black); }
+.sol-face-card.sol-red { color: var(--sol-red); }
+.sol-face-card.sol-black { color: var(--sol-black); }
 
 .sol-card-back {
   background: var(--sol-card-back);
@@ -1614,7 +1614,7 @@ html, body {
   z-index: 999;
 }
 
-.sol-drag-ghost .sol-card {
+.sol-drag-ghost .sol-face-card {
   position: absolute;
   width: 100%;
   box-shadow: 0 8px 24px rgba(0,0,0,0.55);

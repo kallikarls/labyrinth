@@ -284,7 +284,7 @@ export class Solitaire {
 
   _makeCardEl(card, draggable, pileKey, idx) {
     const el = document.createElement('div');
-    el.className = 'sol-card' + (card.faceUp ? '' : ' sol-card-back');
+    el.className = 'sol-face-card' + (card.faceUp ? '' : ' sol-card-back');
     if (card.faceUp) {
       const isRed = RED.has(card.suit);
       el.classList.add(isRed ? 'sol-red' : 'sol-black');
