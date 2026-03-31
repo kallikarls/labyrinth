@@ -398,11 +398,11 @@ export class Coloring {
 
     document.getElementById('btnGalleryBack').addEventListener('click', () => {
       document.getElementById('galleryScreen').classList.remove('active');
-      document.getElementById('startScreen').classList.add('active');
+      document.getElementById('homeScreen').classList.add('active');
     });
 
     document.getElementById('btnColorBook').addEventListener('click', () => {
-      document.getElementById('startScreen').classList.remove('active');
+      document.getElementById('homeScreen').classList.remove('active');
       document.getElementById('galleryScreen').classList.add('active');
     });
 

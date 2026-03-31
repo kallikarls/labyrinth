@@ -10,11 +10,12 @@ import { Renderer }             from './renderer.js';
 import { Input }                from './input.js';
 import { Audio }                from './audio.js';
 import { Confetti, Trail }      from './particles.js';
+import { t }                    from './i18n.js';
 
 const SAVE_KEY = 'labyrinth_stars';
 
 // Game states
-const STATE = { MENU: 'menu', PLAYING: 'playing', WIN: 'win' };
+const STATE = { HOME: 'home', MENU: 'menu', PLAYING: 'playing', WIN: 'win' };
 
 export class Game {
   constructor() {
@@ -49,6 +50,7 @@ export class Game {
 
     // UI elements
     this._ui = {
+      homeScreen:  document.getElementById('homeScreen'),
       startScreen: document.getElementById('startScreen'),
       hud:         document.getElementById('hud'),
       winScreen:   document.getElementById('winScreen'),
@@ -56,6 +58,8 @@ export class Game {
       winEmoji:    document.getElementById('winEmoji'),
       winSub:      document.getElementById('winSub'),
       winStars:    document.getElementById('winStars'),
+      btnLabyrinth:document.getElementById('btnLabyrinth'),
+      btnAllGames: document.getElementById('btnAllGames'),
       btnEasy:     document.getElementById('btnEasy'),
       btnMedium:   document.getElementById('btnMedium'),
       btnHard:     document.getElementById('btnHard'),
@@ -73,7 +77,7 @@ export class Game {
 
     this._bindUI();
     this._updateStarDisplay();
-    this._showScreen(STATE.MENU);
+    this._showScreen(STATE.HOME);
   }
 
   // ── Initialise ───────────────────────────────────────────────────────────────
@@ -155,7 +159,7 @@ export class Game {
     // Update win screen text
     const emojis = ['🎉', '🌟', '🏆', '🥳', '✨'];
     this._ui.winEmoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    this._ui.winSub.textContent   = 'You found the exit!';
+    this._ui.winSub.textContent   = t('foundExit');
     this._ui.winStars.textContent = this.stars[this.level] || '';
 
     this._showScreen(STATE.WIN);
@@ -222,6 +226,9 @@ export class Game {
   _bindUI() {
     const ui = this._ui;
 
+    ui.btnLabyrinth.addEventListener('click', () => this._showScreen(STATE.MENU));
+    ui.btnAllGames.addEventListener('click',  () => this._showScreen(STATE.HOME));
+
     const startLevel = (key) => this._startLevel(key);
     ui.btnEasy.addEventListener('click',   () => startLevel('easy'));
     ui.btnMedium.addEventListener('click', () => startLevel('medium'));
@@ -266,11 +273,14 @@ export class Game {
     const ui = this._ui;
 
     // Deactivate all
+    ui.homeScreen.classList.remove('active');
     ui.startScreen.classList.remove('active');
     ui.hud.classList.remove('active');
     ui.winScreen.classList.remove('active');
 
-    if (state === STATE.MENU) {
+    if (state === STATE.HOME) {
+      ui.homeScreen.classList.add('active');
+    } else if (state === STATE.MENU) {
       ui.startScreen.classList.add('active');
     } else if (state === STATE.PLAYING) {
       // HUD is visible but its pointer-events are controlled per-element
@@ -285,7 +295,7 @@ export class Game {
     const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
     if (!isTouchDevice) {
       this._ui.keyHint.classList.add('visible');
-      this._ui.hintText.textContent = 'Use arrow keys or tilt your device to roll the ball!';
+      this._ui.hintText.textContent = t('hintKeys');
       // Hide after 5s
       setTimeout(() => this._ui.keyHint.classList.remove('visible'), 5000);
     }

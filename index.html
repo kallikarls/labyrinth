@@ -22,45 +22,76 @@
   <!-- Game Canvas -->
   <canvas id="gameCanvas"></canvas>
 
-  <!-- START SCREEN -->
-  <div id="startScreen" class="screen active">
+  <!-- HOME SCREEN —  game hub -->
+  <div id="homeScreen" class="screen active">
+    <div class="home-content">
+      <div class="home-logo">
+        <h1 id="homeTitle" class="home-title">🎮 Leikjaland</h1>
+        <p id="homeSub" class="home-sub">Veldu leik!</p>
+      </div>
+      <div class="home-games">
+        <button id="btnLabyrinth" class="game-card labyrinth-card">
+          <span class="game-card-icon">🌀</span>
+          <div class="game-card-text">
+            <span class="game-card-name">Labyrinth</span>
+            <span id="labyrinthDesc" class="game-card-desc">Halltu til að rúlla boltanum í gegnum völundarhúsið</span>
+          </div>
+        </button>
+        <button id="btnSnake" class="game-card snake-card">
+          <span class="game-card-icon">🐍</span>
+          <div class="game-card-text">
+            <span class="game-card-name">Snake</span>
+            <span id="snakeDesc" class="game-card-desc">Klassískt Snake — borðaðu, vaxtu, hrapadu ekki</span>
+          </div>
+        </button>
+        <button id="btnColorBook" class="game-card colorbook-card">
+          <span class="game-card-icon">🎨</span>
+          <div class="game-card-text">
+            <span class="game-card-name">Color Book</span>
+            <span id="colorBookDesc" class="game-card-desc">Teiknaðu og litu skemmtilegar myndir</span>
+          </div>
+        </button>
+      </div>
+      <button id="btnLang" class="lang-btn">EN</button>
+    </div>
+  </div>
+
+  <!-- LABYRINTH LEVEL SELECT -->
+  <div id="startScreen" class="screen">
     <div class="screen-content">
+      <button id="btnAllGames" class="cb-back-btn" style="align-self:flex-start">← Allir leikir</button>
+
       <div class="logo-wrap">
         <div class="logo-ball"></div>
         <h1 class="logo-title">Labyrinth</h1>
-        <p class="logo-sub">Tilt to Roll! 🎉</p>
+        <p id="logoSub" class="logo-sub">Hallaðu til að rúlla! 🎉</p>
       </div>
 
       <div class="level-select">
-        <p class="level-label">Choose your level:</p>
+        <p id="levelLabel" class="level-label">Veldu erfiðleikastig:</p>
         <div class="level-buttons">
           <button id="btnEasy" class="level-btn easy" data-level="easy">
             <span class="level-icon">🐢</span>
-            <span class="level-name">Easy</span>
+            <span id="easyName" class="level-name">Auðvelt</span>
             <span class="level-desc">6×6</span>
             <span id="starsEasy" class="level-stars"></span>
           </button>
           <button id="btnMedium" class="level-btn medium" data-level="medium">
             <span class="level-icon">🐇</span>
-            <span class="level-name">Medium</span>
+            <span id="mediumName" class="level-name">Miðlungs</span>
             <span class="level-desc">8×8</span>
             <span id="starsMedium" class="level-stars"></span>
           </button>
           <button id="btnHard" class="level-btn hard" data-level="hard">
             <span class="level-icon">🦁</span>
-            <span class="level-name">Hard</span>
+            <span id="hardName" class="level-name">Erfitt</span>
             <span class="level-desc">10×10</span>
             <span id="starsHard" class="level-stars"></span>
           </button>
         </div>
       </div>
 
-      <div class="game-teasers">
-        <button id="btnColorBook" class="colorbook-btn">🎨 Color Book</button>
-        <button id="btnSnake" class="snake-teaser-btn">🐍 Snake</button>
-      </div>
-
-      <p class="hint-text" id="hintText">Tilt your device to roll the ball!</p>
+      <p class="hint-text" id="hintText">Halltu tækinu til að rúlla boltanum!</p>
     </div>
   </div>
 
@@ -72,7 +103,7 @@
       <button id="btnMute" class="hud-btn" aria-label="Toggle sound">🔊</button>
     </div>
     <div class="hud-bottom">
-      <button id="btnNewMaze" class="hud-btn-pill">🔀 New Maze</button>
+      <button id="btnNewMaze" class="hud-btn-pill">🔀 Nýr völundarhús</button>
     </div>
   </div>
 
@@ -80,12 +111,12 @@
   <div id="winScreen" class="screen">
     <div class="win-content">
       <div class="win-emoji" id="winEmoji">🌟</div>
-      <h2 class="win-title">Amazing!</h2>
-      <p class="win-sub" id="winSub">You found the exit!</p>
+      <h2 id="winTitle" class="win-title">Frábært!</h2>
+      <p class="win-sub" id="winSub">Þú fannst útganginn!</p>
       <div class="win-stars" id="winStars"></div>
       <div class="win-buttons">
-        <button id="btnPlayAgain" class="win-btn primary">🔀 New Maze</button>
-        <button id="btnGoHome" class="win-btn secondary">🏠 Home</button>
+        <button id="btnPlayAgain" class="win-btn primary">🔀 Nýr völundarhús</button>
+        <button id="btnGoHome" class="win-btn secondary">🏠 Heim</button>
       </div>
     </div>
     <canvas id="confettiCanvas"></canvas>
@@ -93,14 +124,14 @@
 
   <!-- KEYBOARD HINT (desktop only) -->
   <div id="keyboardHint" class="keyboard-hint">
-    <span>Use arrow keys or WASD to control the ball</span>
+    <span id="keyboardHintText">Notaðu örvalykla eða WASD til að rúlla boltanum</span>
   </div>
 
   <!-- GALLERY SCREEN -->
   <div id="galleryScreen" class="screen cb-screen">
     <div class="cb-header">
-      <button id="btnGalleryBack" class="cb-back-btn">🏠 Home</button>
-      <h2 class="cb-title">🎨 Color Book</h2>
+      <button id="btnGalleryBack" class="cb-back-btn">🏠 Heim</button>
+      <h2 id="galleryTitle" class="cb-title">🎨 Litabók</h2>
       <span></span>
     </div>
     <div class="gallery-grid" id="galleryGrid"></div>
@@ -109,7 +140,7 @@
   <!-- COLORING SCREEN -->
   <div id="coloringScreen" class="screen cb-screen">
     <div class="cb-header">
-      <button id="btnColoringBack" class="cb-back-btn">← Back</button>
+      <button id="btnColoringBack" class="cb-back-btn">← Til baka</button>
       <span class="cb-title" id="coloringTitle">Drawing</span>
       <div class="cb-header-actions">
         <button id="btnColoringClear" class="cb-action-btn" title="Clear">🗑️</button>
@@ -142,12 +173,12 @@
     <div id="snakeOverlay" class="snake-overlay">
       <div class="snake-over-content">
         <div class="snake-over-emoji">🐍</div>
-        <h2 class="snake-over-title">Game Over!</h2>
-        <p id="snakeFinalScore" class="snake-over-score">Score: 0</p>
-        <p id="snakeNewBest" class="snake-new-best">🎉 New Best!</p>
+        <h2 id="snakeOverTitle" class="snake-over-title">Leik lokið!</h2>
+        <p id="snakeFinalScore" class="snake-over-score">Stig: 0</p>
+        <p id="snakeNewBest" class="snake-new-best">🎉 Nýtt met!</p>
         <div class="snake-over-buttons">
-          <button id="btnSnakeRestart" class="win-btn primary">🔄 Play Again</button>
-          <button id="btnSnakeOverHome" class="win-btn secondary">🏠 Home</button>
+          <button id="btnSnakeRestart" class="win-btn primary">🔄 Spila aftur</button>
+          <button id="btnSnakeOverHome" class="win-btn secondary">🏠 Heim</button>
         </div>
       </div>
     </div>

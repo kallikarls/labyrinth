@@ -4,10 +4,10 @@
  * Controls: Arrow keys / WASD  |  Touch swipe  |  Space / Esc = pause
  */
 
-const CELL    = 22;    // grid cell size in pixels
-const TICK_MS = 130;   // ms per game step
+import { t } from './i18n.js';
 
-// Polyfill-safe rounded rectangle helper
+const CELL    = 22;    // grid cell size in pixels
+const TICK_MS = 160;   // ms per game step
 function rrect(ctx, x, y, w, h, r) {
   ctx.beginPath();
   ctx.moveTo(x + r, y);
@@ -18,7 +18,7 @@ function rrect(ctx, x, y, w, h, r) {
   ctx.closePath();
 }
 
-export class Snake {
+// Polyfill-safe rounded rectangle helper
   constructor() {
     this._canvas = document.getElementById('snakeCanvas');
     this._ctx    = this._canvas.getContext('2d');
@@ -49,14 +49,15 @@ export class Snake {
       btnOverHome:document.getElementById('btnSnakeOverHome'),
     };
 
-    this._ui.bestEl.textContent = `Best: ${this._best}`;
+    this._ui.bestEl.textContent = `${t('best')}: ${this._best}`;
+    this._ui.bestEl.dataset.value = String(this._best);
     this._bindUI();
   }
 
   // ── Public ──────────────────────────────────────────────────────────────────
 
   open() {
-    document.getElementById('startScreen').classList.remove('active');
+    document.getElementById('homeScreen').classList.remove('active');
     this._ui.screen.classList.add('active');
     this._newGame();
   }
@@ -65,7 +66,7 @@ export class Snake {
     this._stop();
     this._ui.screen.classList.remove('active');
     this._ui.overlay.classList.remove('active');
-    document.getElementById('startScreen').classList.add('active');
+    document.getElementById('homeScreen').classList.add('active');
   }
 
   // ── Game lifecycle ───────────────────────────────────────────────────────────
@@ -85,7 +86,8 @@ export class Snake {
     this._score   = 0;
     this._paused  = false;
 
-    this._ui.scoreEl.textContent  = 'Score: 0';
+    this._ui.scoreEl.textContent  = `${t('score')}: 0`;
+    this._ui.scoreEl.dataset.value = '0';
     this._ui.btnPause.textContent = '⏸';
     this._ui.overlay.classList.remove('active');
 
@@ -140,7 +142,8 @@ export class Snake {
 
     if (nx === this._food.x && ny === this._food.y) {
       this._score++;
-      this._ui.scoreEl.textContent = `Score: ${this._score}`;
+      this._ui.scoreEl.textContent = `${t('score')}: ${this._score}`;
+      this._ui.scoreEl.dataset.value = String(this._score);
       this._spawnFood();
     } else {
       this._snake.pop();
@@ -154,11 +157,12 @@ export class Snake {
     if (this._score > this._best) {
       this._best = this._score;
       localStorage.setItem('snake_best', String(this._best));
-      this._ui.bestEl.textContent = `Best: ${this._best}`;
+      this._ui.bestEl.textContent    = `${t('best')}: ${this._best}`;
+      this._ui.bestEl.dataset.value  = String(this._best);
       newBest = true;
     }
 
-    this._ui.finalScore.textContent   = `Score: ${this._score}`;
+    this._ui.finalScore.textContent   = `${t('score')}: ${this._score}`;
     this._ui.newBest.style.display    = newBest ? 'block' : 'none';
     this._ui.overlay.classList.add('active');
   }
@@ -255,7 +259,7 @@ export class Snake {
       ctx.fillStyle = '#fff';
       ctx.font      = `bold ${Math.round(W * 0.08)}px Outfit, sans-serif`;
       ctx.textAlign = 'center';
-      ctx.fillText('PAUSED', W / 2, H / 2);
+      ctx.fillText(t('paused'), W / 2, H / 2);
       ctx.textAlign = 'left';
     }
   }

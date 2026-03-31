@@ -445,6 +445,128 @@ html, body {
 }
 
 /* ══════════════════════════════════════════════════════
+   HOME SCREEN
+   ══════════════════════════════════════════════════════ */
+
+#homeScreen {
+  background: linear-gradient(160deg, rgba(61,32,5,0.96) 0%, rgba(40,18,2,0.98) 100%);
+}
+
+.home-content {
+  width: min(92vw, 440px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.home-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.home-title {
+  font-size: clamp(2rem, 9vw, 3rem);
+  font-weight: 900;
+  color: var(--accent-gold);
+  letter-spacing: 2px;
+  text-shadow: 0 3px 12px rgba(0,0,0,0.5);
+}
+
+.home-sub {
+  font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+  color: var(--wood-pale);
+  font-weight: 600;
+}
+
+.home-games {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.lang-btn {
+  margin-top: 4px;
+  padding: 8px 22px;
+  border-radius: 999px;
+  border: 2px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--accent-gold);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: transform 0.16s, box-shadow 0.16s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.lang-btn:hover, .lang-btn:active {
+  transform: scale(1.08);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.game-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: #fff;
+  cursor: pointer;
+  font-family: var(--font);
+  text-align: left;
+  transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+}
+
+.game-card:hover, .game-card:active {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.game-card-icon {
+  font-size: 2.4rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.game-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.game-card-name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.game-card-desc {
+  font-size: 0.85rem;
+  color: var(--wood-pale);
+  font-weight: 500;
+}
+
+.labyrinth-card { border-color: rgba(245,200,66,0.5); }
+.labyrinth-card:hover { box-shadow: 0 8px 32px rgba(245,200,66,0.3); }
+.labyrinth-card .game-card-name { color: var(--accent-gold); }
+
+.snake-card { border-color: rgba(62,207,110,0.5); }
+.snake-card:hover { box-shadow: 0 8px 32px rgba(62,207,110,0.3); }
+.snake-card .game-card-name { color: var(--easy-clr); }
+
+.colorbook-card { border-color: rgba(255,160,30,0.5); }
+.colorbook-card:hover { box-shadow: 0 8px 32px rgba(255,160,30,0.3); }
+.colorbook-card .game-card-name { color: #ff9f2e; }
+
+/* ══════════════════════════════════════════════════════
    COLOR BOOK
    ══════════════════════════════════════════════════════ */
 
