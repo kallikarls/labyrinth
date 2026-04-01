@@ -1,4 +1,4 @@
-/**
+﻿/**
  * mathgame.js — Elementary Maths Game
  *
  * Four operations: + − × ÷
@@ -131,7 +131,7 @@ export class MathGame {
 
     // Question
     this._ui.questionEl.textContent = q.text;
-    this._ui.questionEl.classList.remove('mg-q-pop');
+    this._ui.questionEl.classList.remove('mg-q-pop', 'mg-q-solved');
     void this._ui.questionEl.offsetWidth;
     this._ui.questionEl.classList.add('mg-q-pop');
 
@@ -151,36 +151,52 @@ export class MathGame {
   // ── Question generator ────────────────────────────────────────────────────
 
   _generateQuestion() {
-    const lvl = this._level;
-
-    // Available operations by level
-    const ops = lvl === 1 ? ['+', '−'] : ['+', '−', '×', '÷'];
-    const op  = ops[Math.floor(Math.random() * ops.length)];
-    const max = lvl <= 2 ? 10 : 20;
+    const cat   = this._category;
+    const opMap = { add: ['+'], sub: ['−'], mul: ['×'], div: ['÷'], mixed: ['+', '−', '×', '÷'] };
+    const ops   = opMap[cat] || opMap.mixed;
+    const op    = ops[Math.floor(Math.random() * ops.length)];
 
     let a, b, answer;
 
     if (op === '+') {
-      a = this._rand(1, max);
-      b = this._rand(1, max);
+      a = this._rand(1, 20);
+      b = this._rand(1, 20);
       answer = a + b;
     } else if (op === '−') {
-      a = this._rand(1, max);
-      b = this._rand(1, a);       // ensure b ≤ a so answer ≥ 0
+      a = this._rand(2, 20);
+      b = this._rand(1, a - 1);   // ensure answer > 0
       answer = a - b;
     } else if (op === '×') {
-      a = this._rand(2, Math.min(max, 10));
-      b = this._rand(2, Math.min(max, 10));
+      a = this._rand(2, 12);
+      b = this._rand(2, 12);
       answer = a * b;
     } else { // ÷
-      b      = this._rand(2, Math.min(max, 10));
-      answer = this._rand(1, Math.min(max, 10));
-      a      = b * answer; // guarantee clean division
+      b      = this._rand(2, 10);
+      answer = this._rand(1, 12);
+      a      = b * answer;        // guarantee clean division
     }
 
-    const text = `${a}  ${op}  ${b}  =  ?`;
-    const choices = this._makeChoices(answer, op, max);
-    return { text, answer, choices };
+    const maxVal  = op === '×' ? 144 : op === '÷' ? 12 : 40;
+    // Randomly hide: 0=result, 1=operand a, 2=operand b
+    const result   = answer;
+    const hide     = this._rand(0, 2);
+    const fullText = `${a}  ${op}  ${b}  =  ${result}`;
+    let text, hiddenVal;
+
+    if (hide === 0) {
+      hiddenVal = result;
+      text = `${a}  ${op}  ${b}  =  ?`;
+    } else if (hide === 1) {
+      hiddenVal = a;
+      text = `?  ${op}  ${b}  =  ${result}`;
+    } else {
+      hiddenVal = b;
+      text = `${a}  ${op}  ?  =  ${result}`;
+    }
+
+    const maxVal  = Math.max(hiddenVal * 2 + 10, 40);
+    const choices = this._makeChoices(hiddenVal, op, maxVal);
+    return { text, fullText, answer: hiddenVal, choices };
   }
 
   _makeChoices(correct, op, max) {
@@ -238,15 +254,19 @@ export class MathGame {
       const streakBonus = this._streak >= 3 ? 20 : 0;
       this._score += 100 + speedBonus + streakBonus;
       this._updateHUD();
-      setTimeout(() => { this._qIdx++; this._nextQuestion(); }, 650);
+      // Fill in the complete equation
+      this._ui.questionEl.textContent = this._currentQ.fullText + '  ✓';
+      this._ui.questionEl.classList.add('mg-q-solved');
+      setTimeout(() => { this._qIdx++; this._nextQuestion(); }, 900);
     } else {
       btn.classList.add('mg-wrong');
       this._streak = 0;
       this._updateHUD();
-      // Highlight the correct button
+      // Highlight the correct button and reveal full equation
       [...this._ui.choicesEl.querySelectorAll('.mg-choice')].forEach(b => {
         if (parseInt(b.textContent) === this._currentQ.answer) b.classList.add('mg-correct-reveal');
       });
+      this._ui.questionEl.textContent = this._currentQ.fullText;
       setTimeout(() => { this._qIdx++; this._nextQuestion(); }, 1200);
     }
   }
@@ -285,10 +305,11 @@ export class MathGame {
     this._state  = 'feedback';
     this._streak = 0;
     this._updateHUD();
-    // Show correct answer
+    // Show correct answer and reveal full equation
     [...this._ui.choicesEl.querySelectorAll('.mg-choice')].forEach(b => {
       if (parseInt(b.textContent) === this._currentQ.answer) b.classList.add('mg-correct-reveal');
     });
+    this._ui.questionEl.textContent = this._currentQ.fullText;
     setTimeout(() => { this._qIdx++; this._nextQuestion(); }, 1200);
   }
 

@@ -2005,7 +2005,8 @@ html, body {
   70%  { transform: scale(1.08); opacity: 1; }
   100% { transform: scale(1); }
 }
-.mg-q-pop { animation: mg-pop 0.3s ease forwards; }
+.mg-q-pop    { animation: mg-pop 0.3s ease forwards; }
+.mg-q-solved { color: #2ecc71; text-shadow: 0 0 20px rgba(46,204,113,0.6); }
 
 /* ── Choices grid: 2×2 ── */
 .mg-choices {
