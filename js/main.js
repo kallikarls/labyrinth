@@ -32,6 +32,15 @@ window.addEventListener('DOMContentLoaded', () => {
   const timeGame       = new TimeGame();
   game.start();
 
+  // Ensure every game's close() restores the home screen.
+  // (Snake and the labyrinth game manage homeScreen themselves already.)
+  const homeEl = document.getElementById('homeScreen');
+  [tetris, breakout, spaceInvaders, racer, solitaire, wordGame, mathGame, timeGame]
+    .forEach(g => {
+      const orig = g.close.bind(g);
+      g.close = () => { orig(); homeEl.classList.add('active'); };
+    });
+
   document.getElementById('btnSnake').addEventListener('click', () => snake.open());
   document.getElementById('btnTetris').addEventListener('click', () => tetris.open());
   document.getElementById('btnBreakout').addEventListener('click', () => breakout.open());

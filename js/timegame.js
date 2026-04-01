@@ -62,7 +62,7 @@ export class TimeGame {
   _resizeClock() {
     const canvas = this._ui.canvas;
     const wrap   = canvas.parentElement;
-    const size   = Math.min(248, wrap.clientWidth - 40);
+    const size   = Math.min(290, wrap.clientWidth - 32);
     const dpr    = window.devicePixelRatio || 1;
     canvas.width        = Math.round(size * dpr);
     canvas.height       = Math.round(size * dpr);
@@ -78,8 +78,8 @@ export class TimeGame {
     const cx  = S / 2;
     const cy  = S / 2;
     // R_face leaves an outer band for minute labels
-    const R   = S * 0.36;          // clock face radius  (~72% of half-canvas)
-    const Rl  = S * 0.455;         // minute-label radius (just inside canvas edge)
+    const R   = S * 0.39;          // clock face radius
+    const Rl  = S * 0.460;         // minute-label radius (outside circle, inside canvas)
 
     ctx.clearRect(0, 0, S, S);
 
