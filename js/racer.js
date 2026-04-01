@@ -253,9 +253,9 @@ export class Racer {
     for (let i = 0; i < MAX_OBS; i++) {
       const type = types[i % types.length];
       let mesh, hw;
-      if      (type === 'cone')    { mesh = this._makeCone();    hw = 0.55; }
-      else if (type === 'barrier') { mesh = this._makeBarrier(); hw = 1.85; }
-      else                         { mesh = this._makeTruck();   hw = 1.65; }
+      if      (type === 'cone')    { mesh = this._makeCone();    hw = 0.30; }
+      else if (type === 'barrier') { mesh = this._makeBarrier(); hw = 1.10; }
+      else                         { mesh = this._makeTruck();   hw = 1.00; }
 
       // Park far ahead initially so they don't show until game starts
       const z = -(80 + i * SEG_LEN * 2);
@@ -455,7 +455,7 @@ export class Racer {
     for (const obs of this._obs) {
       if (!obs.active) continue;
       if (obs.z > -3.5 && obs.z < 3.5) {
-        if (Math.abs(obs.x - this._carX) < obs.hw + 0.85) {
+        if (Math.abs(obs.x - this._carX) < obs.hw + 0.50) {
           if (this._invuln <= 0) {
             const push = this._carX >= obs.x ? HIT_PUSH : -HIT_PUSH;
             this._takeDamage(push);
