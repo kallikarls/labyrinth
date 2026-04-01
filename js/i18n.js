@@ -102,6 +102,13 @@ export const STRINGS = {
     solPlayAgain:     '🔄 Spila aftur',
     solWin:           'Sigur! 🎉',
     solMoves:         'færslur',
+    // Word Game
+    wgName:           'Orðaleikurinn',
+    wgDesc:           'Stafaðu orðin - hversu mörg þekkirðu?',
+    wgStart:          '🔤 Byrja!',
+    wgPlayAgain:      '🔄 Spila aftur',
+    wgWin:            'Vel gert! 🎉',
+    wgPoints:         'stig',
     // Language toggle
     langLabel:        'EN',
   },
@@ -198,6 +205,13 @@ export const STRINGS = {
     solPlayAgain:     '🔄 Deal Again',
     solWin:           'You won! 🎉',
     solMoves:         'moves',
+    // Word Game
+    wgName:           'Word Snack',
+    wgDesc:           'Spell the words — how many do you know?',
+    wgStart:          '🔤 Play!',
+    wgPlayAgain:      '🔄 Play Again',
+    wgWin:            'Well done! 🎉',
+    wgPoints:         'points',
     breakoutLevel:    'Level',
     breakoutWin:      'Amazing! 🎉',
     breakoutLaunch:   'Tap or press Space to launch!',
@@ -296,6 +310,10 @@ export function applyAll() {
   // Solitaire home card
   _setText('solName',          t('solName'));
   _setText('solDesc',          t('solDesc'));
+
+  // Word Game home card
+  _setText('wgName',           t('wgName'));
+  _setText('wgDesc',           t('wgDesc'));
 
   // Color Book
   _setText('galleryTitle',     t('colorBook'));

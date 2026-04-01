@@ -1675,3 +1675,233 @@ html, body {
   .sol-hud-info span:last-child { display: none; }
 }
 
+/* ══════════════════════════════════════════════════════
+   WORD GAME (Orðaleikurinn)
+   ══════════════════════════════════════════════════════ */
+
+.wg-card { border-color: rgba(52,152,219,0.5); }
+.wg-card:hover { box-shadow: 0 8px 32px rgba(52,152,219,0.3); }
+.wg-card .game-card-name { color: #3498db; }
+
+/* ── Screen ── */
+.wg-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  background: linear-gradient(160deg, #1a1a2e 0%, #16213e 55%, #0f3460 100%);
+  overflow: hidden;
+}
+
+/* ── HUD ── */
+.wg-hud {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: rgba(0,0,0,0.45);
+  border-bottom: 1px solid rgba(52,152,219,0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 5;
+}
+
+.wg-hearts { display: flex; gap: 2px; font-size: 1.15rem; }
+.wg-score  { color: #f39c12; font-weight: 800; font-size: 1rem; }
+
+/* ── Main game area ── */
+.wg-main {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 8px 14px 14px;
+  overflow: hidden;
+}
+
+/* ── Emoji clue ── */
+.wg-emoji {
+  font-size: clamp(5.5rem, 24vw, 9rem);
+  line-height: 1;
+  text-align: center;
+  filter: drop-shadow(0 4px 18px rgba(0,0,0,0.55));
+}
+
+@keyframes wg-bounce {
+  0%   { transform: scale(0.6) translateY(12px); opacity: 0; }
+  65%  { transform: scale(1.18) translateY(-5px); opacity: 1; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+@keyframes wg-spin {
+  0%   { transform: scale(1) rotate(0deg); }
+  50%  { transform: scale(1.2) rotate(14deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.wg-emoji-bounce { animation: wg-bounce 0.42s ease forwards; }
+.wg-emoji-spin   { animation: wg-spin   0.48s ease; }
+
+/* ── Category + progress ── */
+.wg-category {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.6);
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+.wg-progress {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ── Answer slots ── */
+.wg-answer {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.wg-slot {
+  /* Shrink for long words using CSS custom property set from JS */
+  width:  min(calc((90vw - 5px * (var(--wg-word-len, 4) - 1)) / var(--wg-word-len, 4)), 56px);
+  height: calc(min(calc((90vw - 5px * (var(--wg-word-len, 4) - 1)) / var(--wg-word-len, 4)), 56px) * 1.3);
+  border-radius: 10px;
+  border: 2.5px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(0.9rem, calc(4.5vw / (var(--wg-word-len, 4) * 0.5)), 2rem);
+  font-weight: 900;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.wg-slot-filled {
+  background: rgba(52,152,219,0.22);
+  border-color: #3498db;
+}
+
+.wg-slot-correct {
+  background: rgba(46,204,113,0.32) !important;
+  border-color: #2ecc71 !important;
+  color: #2ecc71 !important;
+}
+
+.wg-slot-hint {
+  background: rgba(243,156,18,0.22) !important;
+  border-color: #f39c12 !important;
+  color: #f39c12 !important;
+}
+
+@keyframes wg-shake {
+  0%,100% { transform: translateX(0); }
+  20%     { transform: translateX(-9px); }
+  40%     { transform: translateX(9px); }
+  60%     { transform: translateX(-6px); }
+  80%     { transform: translateX(6px); }
+}
+
+.wg-shake { animation: wg-shake 0.42s ease; }
+
+/* ── Letter tiles ── */
+.wg-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+}
+
+.wg-tile {
+  width:  min(calc((90vw - 8px * (var(--wg-word-len, 4) - 1)) / var(--wg-word-len, 4)), 64px);
+  height: calc(min(calc((90vw - 8px * (var(--wg-word-len, 4) - 1)) / var(--wg-word-len, 4)), 64px) * 1.2);
+  border-radius: 12px;
+  border: none;
+  background: #f5f0e8;
+  color: #1a1a2e;
+  font-size: clamp(1rem, calc(5vw / (var(--wg-word-len, 4) * 0.45)), 2.2rem);
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #c4b89a, 0 6px 14px rgba(0,0,0,0.45);
+  transition: transform 0.08s, box-shadow 0.08s, opacity 0.15s;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.wg-tile:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #c4b89a, 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.wg-tile-used {
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* ── Feedback emoji pop ── */
+.wg-feedback {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  font-size: 5rem;
+  pointer-events: none;
+  z-index: 20;
+  transition: transform 0.14s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.wg-feedback-show { transform: translate(-50%, -50%) scale(1); }
+
+/* ── Overlay ── */
+.wg-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.75);
+  z-index: 10;
+}
+
+.wg-over-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  background: var(--glass-bg);
+  border: 2px solid rgba(52,152,219,0.45);
+  border-radius: var(--radius-lg);
+  padding: 30px 38px;
+  box-shadow: var(--shadow-lg);
+  width: min(92vw, 360px);
+  text-align: center;
+}
+
+.wg-over-emoji { font-size: 3rem; }
+
+.wg-over-title {
+  font-size: clamp(1.6rem, 6vw, 2.4rem);
+  font-weight: 900;
+  color: #3498db;
+}
+
+.wg-over-score {
+  font-size: 1rem;
+  color: #aaa;
+}
+
+.wg-over-buttons {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+

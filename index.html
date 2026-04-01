@@ -62,21 +62,21 @@
         <button id="btnBreakout" class="game-card breakout-card">
           <span class="game-card-icon">🎾</span>
           <div class="game-card-text">
-            <span id="breakoutName" class="game-card-name">Breakout</span>
-            <span id="breakoutDesc" class="game-card-desc">Brotnaðu í gegnum kubba með bolta</span>
+            <span id="breakoutName" class="game-card-name">Múrbrot</span>
+            <span id="breakoutDesc" class="game-card-desc">Brjóttu kubba með bolta</span>
           </div>
         </button>
         <button id="btnSpaceInvaders" class="game-card si-card">
           <span class="game-card-icon">👾</span>
           <div class="game-card-text">
-            <span id="siName" class="game-card-name">Space Invaders</span>
+            <span id="siName" class="game-card-name">Geimverur</span>
             <span id="siDesc" class="game-card-desc">Skjóttu geimverunum</span>
           </div>
         </button>
         <button id="btnRacer" class="game-card racer-card">
           <span class="game-card-icon">🏎️</span>
           <div class="game-card-text">
-            <span id="racerName" class="game-card-name">Akstur</span>
+            <span id="racerName" class="game-card-name">Kappakstur</span>
             <span id="racerDesc" class="game-card-desc">Hallaðu til að aka</span>
           </div>
         </button>
@@ -85,6 +85,13 @@
           <div class="game-card-text">
             <span id="solName" class="game-card-name">Solitaire</span>
             <span id="solDesc" class="game-card-desc">Dragðu og raðaðu öllum kortum</span>
+          </div>
+        </button>
+        <button id="btnWordGame" class="game-card wg-card">
+          <span class="game-card-icon">🔤</span>
+          <div class="game-card-text">
+            <span id="wgName" class="game-card-name">Orðaleikurinn</span>
+            <span id="wgDesc" class="game-card-desc">Stafaðu orðin</span>
           </div>
         </button>
 
@@ -330,6 +337,34 @@
         <div class="si-over-buttons">
           <button id="btnSIRestart" class="win-btn primary">🔄 Spila aftur</button>
           <button id="btnSIOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORD GAME SCREEN -->
+  <div id="wgScreen" class="screen wg-screen">
+    <div class="wg-hud">
+      <button id="btnWGHome" class="hud-btn" aria-label="Heim">🏠</button>
+      <div id="wgHearts" class="wg-hearts">❤️❤️❤️</div>
+      <span id="wgScore" class="wg-score">0</span>
+    </div>
+    <div class="wg-main">
+      <div id="wgEmoji" class="wg-emoji">🔤</div>
+      <div id="wgCategory" class="wg-category"></div>
+      <div id="wgProgress" class="wg-progress"></div>
+      <div id="wgAnswer"   class="wg-answer"></div>
+      <div id="wgTiles"    class="wg-tiles"></div>
+      <div id="wgFeedback" class="wg-feedback"></div>
+    </div>
+    <div id="wgOverlay" class="wg-overlay" style="display:none">
+      <div class="wg-over-content">
+        <div id="wgOverEmoji" class="wg-over-emoji">🔤</div>
+        <h2  id="wgOverTitle" class="wg-over-title">Orðaleikurinn</h2>
+        <p   id="wgOverScore" class="wg-over-score"></p>
+        <div class="wg-over-buttons">
+          <button id="btnWGStart"    class="win-btn primary">🔤 Byrja!</button>
+          <button id="btnWGOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
         </div>
       </div>
     </div>
