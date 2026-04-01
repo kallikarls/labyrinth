@@ -11,6 +11,7 @@ import { SpaceInvaders }  from './spaceinvaders.js';
 import { Racer }          from './racer.js';
 import { Solitaire }      from './solitaire.js';
 import { WordGame }        from './wordgame.js';
+import { MathGame }        from './mathgame.js';
 import { applyAll, setLang } from './i18n.js';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -26,6 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const racer          = new Racer();
   const solitaire      = new Solitaire();
   const wordGame       = new WordGame();
+  const mathGame       = new MathGame();
   game.start();
 
   document.getElementById('btnSnake').addEventListener('click', () => snake.open());
@@ -35,6 +37,7 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btnRacer').addEventListener('click', () => racer.open());
   document.getElementById('btnSolitaire').addEventListener('click', () => solitaire.open());
   document.getElementById('btnWordGame').addEventListener('click',  () => wordGame.open());
+  document.getElementById('btnMathGame').addEventListener('click',  () => mathGame.open());
   document.getElementById('btnLangIS').addEventListener('click', () => {
     setLang('is');
     game._updateStarDisplay();

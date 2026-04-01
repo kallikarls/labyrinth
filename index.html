@@ -94,6 +94,13 @@
             <span id="wgDesc" class="game-card-desc">Stafaðu orðin</span>
           </div>
         </button>
+        <button id="btnMathGame" class="game-card mg-card">
+          <span class="game-card-icon">➕</span>
+          <div class="game-card-text">
+            <span id="mgName" class="game-card-name">Stærðfræði</span>
+            <span id="mgDesc" class="game-card-desc">Leggjum saman, dregðum frá</span>
+          </div>
+        </button>
 
       </div>
       <div class="lang-switcher">
@@ -391,6 +398,41 @@
         <div class="sol-over-buttons">
           <button id="btnSolStart" class="win-btn primary">🃏 Spila!</button>
           <button id="btnSolOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MATH GAME SCREEN -->
+  <div id="mgScreen" class="screen mg-screen">
+    <div class="mg-hud">
+      <button id="btnMGHome" class="hud-btn" aria-label="Heim">🏠</button>
+      <div id="mgStreak" class="mg-streak"></div>
+      <span id="mgScore" class="mg-score-hud">0</span>
+    </div>
+    <div class="mg-timer-wrap"><div id="mgTimerBar" class="mg-timer-bar"></div></div>
+    <div class="mg-main">
+      <div class="mg-progress-row">
+        <div class="mg-progress-track"><div id="mgProgressBar" class="mg-progress-fill"></div></div>
+        <span id="mgProgressTxt" class="mg-progress-txt">1 / 10</span>
+      </div>
+      <div id="mgQuestion" class="mg-question">?</div>
+      <div id="mgChoices"  class="mg-choices"></div>
+    </div>
+    <div id="mgOverlay" class="mg-overlay" style="display:flex">
+      <div class="mg-over-content">
+        <div id="mgOverEmoji" class="mg-over-emoji">🔢</div>
+        <h2  id="mgOverTitle" class="mg-over-title">Stærðfræði</h2>
+        <p   id="mgOverScore" class="mg-over-score">Veldu erefiðleikastig!</p>
+        <p   id="mgOverBest"  class="mg-over-best"></p>
+        <div class="mg-level-row">
+          <button class="mg-level-btn mg-level-active" data-level="1">⭐</button>
+          <button class="mg-level-btn" data-level="2">⭐⭐</button>
+          <button class="mg-level-btn" data-level="3">⭐⭐⭐</button>
+        </div>
+        <div class="mg-over-buttons">
+          <button id="btnMGStart"    class="win-btn primary">🔢 Byrja!</button>
+          <button id="btnMGOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
         </div>
       </div>
     </div>

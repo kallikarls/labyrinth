@@ -108,8 +108,13 @@ export const STRINGS = {
     wgStart:          '🔤 Byrja!',
     wgPlayAgain:      '🔄 Spila aftur',
     wgWin:            'Vel gert! 🎉',
-    wgPoints:         'stig',
-    // Language toggle
+    wgPoints:         'stig',    // Math Game
+    mgName:           'Stærðfræði',
+    mgDesc:           'Leggjum saman, drögum frá, margföldum og deilum',
+    mgStart:          '🔢 Byrja!',
+    mgPlayAgain:      '🔄 Reyna aftur',
+    mgDone:           'Vel gert! 🎉',
+    mgPts:            'stig',    // Language toggle
     langLabel:        'EN',
   },
   en: {
@@ -212,6 +217,13 @@ export const STRINGS = {
     wgPlayAgain:      '🔄 Play Again',
     wgWin:            'Well done! 🎉',
     wgPoints:         'points',
+    // Math Game
+    mgName:           'Maths',
+    mgDesc:           'Add, subtract, multiply and divide',
+    mgStart:          '🔢 Start!',
+    mgPlayAgain:      '🔄 Play Again',
+    mgDone:           'Well done! 🎉',
+    mgPts:            'pts',
     breakoutLevel:    'Level',
     breakoutWin:      'Amazing! 🎉',
     breakoutLaunch:   'Tap or press Space to launch!',
@@ -314,6 +326,10 @@ export function applyAll() {
   // Word Game home card
   _setText('wgName',           t('wgName'));
   _setText('wgDesc',           t('wgDesc'));
+
+  // Math Game home card
+  _setText('mgName',           t('mgName'));
+  _setText('mgDesc',           t('mgDesc'));
 
   // Color Book
   _setText('galleryTitle',     t('colorBook'));
