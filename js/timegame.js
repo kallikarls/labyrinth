@@ -77,17 +77,31 @@ export class TimeGame {
     const S   = this._clockSize;
     const cx  = S / 2;
     const cy  = S / 2;
-    const R   = S / 2 - 4;
+    // R_face leaves an outer band for minute labels
+    const R   = S * 0.36;          // clock face radius  (~72% of half-canvas)
+    const Rl  = S * 0.455;         // minute-label radius (just inside canvas edge)
 
     ctx.clearRect(0, 0, S, S);
+
+    // Minute numbers — outside the circle, one per hour position
+    const minFontSize = Math.round(S * 0.068);
+    ctx.font         = `bold ${minFontSize}px sans-serif`;
+    ctx.fillStyle    = 'rgba(100,210,235,0.9)';
+    ctx.textAlign    = 'center';
+    ctx.textBaseline = 'middle';
+    for (let i = 0; i < 12; i++) {
+      const a     = (i / 12) * Math.PI * 2 - Math.PI / 2;
+      const label = (i * 5).toString().padStart(2, '0');
+      ctx.fillText(label, cx + Math.cos(a) * Rl, cy + Math.sin(a) * Rl);
+    }
 
     // Face
     ctx.beginPath();
     ctx.arc(cx, cy, R, 0, Math.PI * 2);
     ctx.fillStyle = '#16213e';
     ctx.fill();
-    ctx.strokeStyle = 'rgba(52,152,219,0.5)';
-    ctx.lineWidth = 3;
+    ctx.strokeStyle = 'rgba(52,152,219,0.55)';
+    ctx.lineWidth = 2.5;
     ctx.stroke();
 
     // Tick marks
@@ -95,7 +109,7 @@ export class TimeGame {
       const a     = (i / 60) * Math.PI * 2 - Math.PI / 2;
       const isH   = i % 5 === 0;
       const outer = R - 1;
-      const inner = isH ? R * 0.86 : R * 0.93;
+      const inner = isH ? R * 0.84 : R * 0.92;
       ctx.beginPath();
       ctx.moveTo(cx + Math.cos(a) * outer, cy + Math.sin(a) * outer);
       ctx.lineTo(cx + Math.cos(a) * inner, cy + Math.sin(a) * inner);
@@ -104,36 +118,24 @@ export class TimeGame {
       ctx.stroke();
     }
 
-    // Minute numbers — outer ring at each 5-minute mark
-    const minFontSize = Math.round(S * 0.062);
-    ctx.font         = `bold ${minFontSize}px sans-serif`;
-    ctx.fillStyle    = 'rgba(100,210,235,0.88)';
-    ctx.textAlign    = 'center';
-    ctx.textBaseline = 'middle';
-    for (let i = 0; i < 12; i++) {
-      const a     = (i / 12) * Math.PI * 2 - Math.PI / 2;
-      const label = (i * 5).toString().padStart(2, '0');
-      ctx.fillText(label, cx + Math.cos(a) * R * 0.78, cy + Math.sin(a) * R * 0.78);
-    }
-
-    // Hour numbers — inner ring
-    const fontSize = Math.round(S * 0.092);
+    // Hour numbers — comfortable radius inside face
+    const fontSize = Math.round(S * 0.088);
     ctx.font         = `bold ${fontSize}px sans-serif`;
     ctx.fillStyle    = '#ffffff';
     ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
     for (let i = 1; i <= 12; i++) {
       const a = (i / 12) * Math.PI * 2 - Math.PI / 2;
-      ctx.fillText(i.toString(), cx + Math.cos(a) * R * 0.59, cy + Math.sin(a) * R * 0.59);
+      ctx.fillText(i.toString(), cx + Math.cos(a) * R * 0.70, cy + Math.sin(a) * R * 0.70);
     }
 
     // Hour hand
     const hFrac  = ((hour12 % 12) + minute / 60) / 12;
-    this._drawHand(ctx, cx, cy, hFrac * Math.PI * 2, R * 0.44, S * 0.040, '#ffffff');
+    this._drawHand(ctx, cx, cy, hFrac * Math.PI * 2, R * 0.52, S * 0.038, '#ffffff');
 
     // Minute hand
     const mFrac = minute / 60;
-    this._drawHand(ctx, cx, cy, mFrac * Math.PI * 2, R * 0.67, S * 0.026, '#e74c3c');
+    this._drawHand(ctx, cx, cy, mFrac * Math.PI * 2, R * 0.76, S * 0.024, '#e74c3c');
 
     // Center cap
     ctx.beginPath();
