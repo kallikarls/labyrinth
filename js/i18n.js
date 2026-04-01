@@ -114,7 +114,12 @@ export const STRINGS = {
     mgStart:          '🔢 Byrja!',
     mgPlayAgain:      '🔄 Reyna aftur',
     mgDone:           'Vel gert! 🎉',
-    mgPts:            'stig',    // Language toggle
+    mgPts:            'stig',
+    mgCatAdd:         '➕ Samlagning',
+    mgCatSub:         '➖ Frádráttur',
+    mgCatMul:         '✖️ Margföldun',
+    mgCatDiv:         '➗ Deiling',
+    mgCatMixed:       '🔀 Blandað',    // Language toggle
     langLabel:        'EN',
   },
   en: {
@@ -224,6 +229,11 @@ export const STRINGS = {
     mgPlayAgain:      '🔄 Play Again',
     mgDone:           'Well done! 🎉',
     mgPts:            'pts',
+    mgCatAdd:         '➕ Add',
+    mgCatSub:         '➖ Subtract',
+    mgCatMul:         '✖️ Multiply',
+    mgCatDiv:         '➗ Divide',
+    mgCatMixed:       '🔀 Mixed',
     breakoutLevel:    'Level',
     breakoutWin:      'Amazing! 🎉',
     breakoutLaunch:   'Tap or press Space to launch!',

@@ -32,7 +32,7 @@ export class MathGame {
       btnStart:    document.getElementById('btnMGStart'),
       btnHome:     document.getElementById('btnMGHome'),
       btnOverHome: document.getElementById('btnMGOverHome'),
-      levelBtns:   document.querySelectorAll('.mg-level-btn'),
+      catBtns:     document.querySelectorAll('.mg-cat-btn'),
       progressBar: document.getElementById('mgProgressBar'),
       progressTxt: document.getElementById('mgProgressTxt'),
       timerBar:    document.getElementById('mgTimerBar'),
@@ -42,9 +42,9 @@ export class MathGame {
       scoreEl:     document.getElementById('mgScore'),
     };
 
-    this._best    = parseInt(localStorage.getItem(BEST_KEY) || '0', 10);
-    this._level   = 1;   // 1, 2, or 3
-    this._score   = 0;
+    this._best     = parseInt(localStorage.getItem(BEST_KEY) || '0', 10);
+    this._category = 'mixed'; // 'add' | 'sub' | 'mul' | 'div' | 'mixed'
+    this._score    = 0;
     this._qIdx    = 0;
     this._streak  = 0;
     this._state   = 'idle';
@@ -78,7 +78,10 @@ export class MathGame {
     this._ui.overBest.textContent  = best;
     this._ui.btnStart.textContent  = t('mgStart');
     this._ui.overlay.style.display = 'flex';
-    this._setActiveLevel(this._level);
+    // Update category button labels for current language
+    const _catKeys = { add: 'mgCatAdd', sub: 'mgCatSub', mul: 'mgCatMul', div: 'mgCatDiv', mixed: 'mgCatMixed' };
+    this._ui.catBtns.forEach(b => { b.textContent = t(_catKeys[b.dataset.cat] || b.dataset.cat); });
+    this._setActiveCategory(this._category);
   }
 
   _showEndOverlay() {
@@ -95,12 +98,12 @@ export class MathGame {
     this._ui.overlay.style.display = 'flex';
   }
 
-  // ── Level selection ───────────────────────────────────────────────────────
+  // ── Category selection ─────────────────────────────────────────────────────
 
-  _setActiveLevel(lvl) {
-    this._level = lvl;
-    this._ui.levelBtns.forEach(b => {
-      b.classList.toggle('mg-level-active', parseInt(b.dataset.level) === lvl);
+  _setActiveCategory(cat) {
+    this._category = cat;
+    this._ui.catBtns.forEach(b => {
+      b.classList.toggle('mg-cat-active', b.dataset.cat === cat);
     });
   }
 
@@ -314,8 +317,8 @@ export class MathGame {
     this._ui.btnHome.addEventListener('click',     () => this.close());
     this._ui.btnOverHome.addEventListener('click', () => this.close());
     this._ui.btnStart.addEventListener('click',    () => this._startGame());
-    this._ui.levelBtns.forEach(b => {
-      b.addEventListener('click', () => this._setActiveLevel(parseInt(b.dataset.level)));
+    this._ui.catBtns.forEach(b => {
+      b.addEventListener('click', () => this._setActiveCategory(b.dataset.cat));
     });
   }
 }
