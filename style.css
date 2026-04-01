@@ -2175,8 +2175,7 @@ html, body {
 .tg-score-hud   { color: #3498db; font-weight: 800; font-size: 1rem; }
 
 /* ── Timer ── */
-.tg-timer-wrap { height: 5px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
-.tg-timer-bar  { height: 100%; width: 100%; background: #2ecc71; }
+.tg-timer-wrap { display: none; }
 
 /* ── Main area ── */
 .tg-main {

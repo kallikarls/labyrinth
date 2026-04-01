@@ -6,14 +6,13 @@
  * IS: 24-hour format with ☀️/🌙 icons.
  * EN: 12-hour AM/PM format with ☀️/🌙 icons.
  *
- * 10 questions per round, 15-second timer per question.
+ * 10 questions per round, no time pressure.
  */
 
 import { t, getLang } from './i18n.js';
 
 const BEST_KEY   = 'timegame_best';
 const Q_PER_GAME = 10;
-const Q_TIME_MS  = 15_000;
 
 export class TimeGame {
   constructor() {
@@ -33,17 +32,14 @@ export class TimeGame {
       scoreEl:     document.getElementById('tgScore'),
       progressBar: document.getElementById('tgProgressBar'),
       progressTxt: document.getElementById('tgProgressTxt'),
-      timerBar:    document.getElementById('tgTimerBar'),
     };
-    this._ctx       = this._ui.canvas.getContext('2d');
-    this._best      = parseInt(localStorage.getItem(BEST_KEY) || '0', 10);
-    this._score     = 0;
-    this._qIdx      = 0;
-    this._streak    = 0;
-    this._state     = 'idle';
-    this._timerStart = 0;
-    this._rafTimer  = null;
-    this._currentQ  = null;
+    this._ctx      = this._ui.canvas.getContext('2d');
+    this._best     = parseInt(localStorage.getItem(BEST_KEY) || '0', 10);
+    this._score    = 0;
+    this._qIdx     = 0;
+    this._streak   = 0;
+    this._state    = 'idle';
+    this._currentQ = null;
     this._clockSize = 260;
     this._bindUI();
   }
@@ -57,7 +53,6 @@ export class TimeGame {
   }
 
   close() {
-    this._stopTimer();
     this._ui.screen.classList.remove('active');
     this._state = 'idle';
   }
@@ -100,34 +95,45 @@ export class TimeGame {
       const a     = (i / 60) * Math.PI * 2 - Math.PI / 2;
       const isH   = i % 5 === 0;
       const outer = R - 1;
-      const inner = isH ? R * 0.80 : R * 0.91;
+      const inner = isH ? R * 0.86 : R * 0.93;
       ctx.beginPath();
       ctx.moveTo(cx + Math.cos(a) * outer, cy + Math.sin(a) * outer);
       ctx.lineTo(cx + Math.cos(a) * inner, cy + Math.sin(a) * inner);
-      ctx.strokeStyle = isH ? 'rgba(255,255,255,0.75)' : 'rgba(255,255,255,0.2)';
+      ctx.strokeStyle = isH ? 'rgba(255,255,255,0.65)' : 'rgba(255,255,255,0.18)';
       ctx.lineWidth   = isH ? 2.5 : 1.2;
       ctx.stroke();
     }
 
-    // Numbers
-    const fontSize = Math.round(S * 0.088);
+    // Minute numbers — outer ring at each 5-minute mark
+    const minFontSize = Math.round(S * 0.062);
+    ctx.font         = `bold ${minFontSize}px sans-serif`;
+    ctx.fillStyle    = 'rgba(100,210,235,0.88)';
+    ctx.textAlign    = 'center';
+    ctx.textBaseline = 'middle';
+    for (let i = 0; i < 12; i++) {
+      const a     = (i / 12) * Math.PI * 2 - Math.PI / 2;
+      const label = (i * 5).toString().padStart(2, '0');
+      ctx.fillText(label, cx + Math.cos(a) * R * 0.78, cy + Math.sin(a) * R * 0.78);
+    }
+
+    // Hour numbers — inner ring
+    const fontSize = Math.round(S * 0.092);
     ctx.font         = `bold ${fontSize}px sans-serif`;
     ctx.fillStyle    = '#ffffff';
     ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
     for (let i = 1; i <= 12; i++) {
       const a = (i / 12) * Math.PI * 2 - Math.PI / 2;
-      const r = R * 0.68;
-      ctx.fillText(i.toString(), cx + Math.cos(a) * r, cy + Math.sin(a) * r);
+      ctx.fillText(i.toString(), cx + Math.cos(a) * R * 0.59, cy + Math.sin(a) * R * 0.59);
     }
 
-    // Hour hand — angle: fraction of full circle, 0 = 12 o'clock
+    // Hour hand
     const hFrac  = ((hour12 % 12) + minute / 60) / 12;
-    this._drawHand(ctx, cx, cy, hFrac * Math.PI * 2, R * 0.50, S * 0.038, '#ffffff');
+    this._drawHand(ctx, cx, cy, hFrac * Math.PI * 2, R * 0.44, S * 0.040, '#ffffff');
 
     // Minute hand
     const mFrac = minute / 60;
-    this._drawHand(ctx, cx, cy, mFrac * Math.PI * 2, R * 0.70, S * 0.024, '#e74c3c');
+    this._drawHand(ctx, cx, cy, mFrac * Math.PI * 2, R * 0.67, S * 0.026, '#e74c3c');
 
     // Center cap
     ctx.beginPath();
@@ -239,15 +245,11 @@ export class TimeGame {
   _choose(btn, ch) {
     if (this._state !== 'playing') return;
     this._state = 'feedback';
-    this._stopTimer();
-
-    const elapsed    = Math.max(0, Q_TIME_MS - (performance.now() - this._timerStart));
-    const speedBonus = Math.round((elapsed / Q_TIME_MS) * 50);
 
     if (ch.correct) {
       btn.classList.add('tg-correct');
       this._streak++;
-      this._score += 100 + speedBonus + (this._streak >= 3 ? 20 : 0);
+      this._score += 100 + (this._streak >= 3 ? 20 : 0);
       this._updateHUD();
       setTimeout(() => { this._qIdx++; this._nextQuestion(); }, 900);
     } else {
@@ -266,38 +268,7 @@ export class TimeGame {
     });
   }
 
-  // ── Timer ─────────────────────────────────────────────────────────────────
 
-  _startTimer() {
-    this._stopTimer();
-    this._timerStart = performance.now();
-    this._ui.timerBar.style.width      = '100%';
-    this._ui.timerBar.style.background = '#2ecc71';
-    const tick = () => {
-      const pct = Math.max(0, 1 - (performance.now() - this._timerStart) / Q_TIME_MS);
-      this._ui.timerBar.style.width      = `${pct * 100}%`;
-      this._ui.timerBar.style.background = pct > 0.5 ? '#2ecc71' : pct > 0.25 ? '#f39c12' : '#e74c3c';
-      if (pct > 0 && this._state === 'playing') {
-        this._rafTimer = requestAnimationFrame(tick);
-      } else if (pct <= 0 && this._state === 'playing') {
-        this._onTimeUp();
-      }
-    };
-    this._rafTimer = requestAnimationFrame(tick);
-  }
-
-  _stopTimer() {
-    if (this._rafTimer) { cancelAnimationFrame(this._rafTimer); this._rafTimer = null; }
-  }
-
-  _onTimeUp() {
-    if (this._state !== 'playing') return;
-    this._state  = 'feedback';
-    this._streak = 0;
-    this._updateHUD();
-    this._revealCorrect();
-    setTimeout(() => { this._qIdx++; this._nextQuestion(); }, 1400);
-  }
 
   // ── HUD ───────────────────────────────────────────────────────────────────
 
@@ -350,11 +321,9 @@ export class TimeGame {
     this._ui.progressBar.style.width = `${(this._qIdx / Q_PER_GAME) * 100}%`;
     this._drawClock(q.hour12, q.minute);
     this._renderChoices(q);
-    this._startTimer();
   }
 
   _endGame() {
-    this._stopTimer();
     this._state = 'over';
     this._showEndOverlay();
   }
