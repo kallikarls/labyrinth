@@ -101,6 +101,13 @@
             <span id="mgDesc" class="game-card-desc">Leggjum saman, dregðum frá</span>
           </div>
         </button>
+        <button id="btnTimeGame" class="game-card tg-card">
+          <span class="game-card-icon">🕐</span>
+          <div class="game-card-text">
+            <span id="tgName" class="game-card-name">Hvað er klukkan?</span>
+            <span id="tgDesc" class="game-card-desc">Lestu klukkuna!</span>
+          </div>
+        </button>
 
       </div>
       <div class="lang-switcher">
@@ -398,6 +405,38 @@
         <div class="sol-over-buttons">
           <button id="btnSolStart" class="win-btn primary">🃏 Spila!</button>
           <button id="btnSolOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIME GAME SCREEN -->
+  <div id="tgScreen" class="screen tg-screen">
+    <div class="tg-hud">
+      <button id="btnTGHome" class="hud-btn" aria-label="Heim">🏠</button>
+      <div id="tgStreak" class="tg-streak"></div>
+      <span id="tgScore" class="tg-score-hud">0</span>
+    </div>
+    <div class="tg-timer-wrap"><div id="tgTimerBar" class="tg-timer-bar"></div></div>
+    <div class="tg-main">
+      <div class="tg-progress-row">
+        <div class="tg-progress-track"><div id="tgProgressBar" class="tg-progress-fill"></div></div>
+        <span id="tgProgressTxt" class="tg-progress-txt">1 / 10</span>
+      </div>
+      <div class="tg-clock-wrap">
+        <canvas id="tgClock" width="260" height="260"></canvas>
+      </div>
+      <div id="tgChoices" class="tg-choices"></div>
+    </div>
+    <div id="tgOverlay" class="tg-overlay" style="display:flex">
+      <div class="tg-over-content">
+        <div id="tgOverEmoji" class="tg-over-emoji">🕐</div>
+        <h2  id="tgOverTitle" class="tg-over-title">Hvað er klukkan?</h2>
+        <p   id="tgOverScore" class="tg-over-score">Lestu klukkuna!</p>
+        <p   id="tgOverBest"  class="tg-over-best"></p>
+        <div class="tg-over-buttons">
+          <button id="btnTGStart"    class="win-btn primary">🕐 Byrja!</button>
+          <button id="btnTGOverHome" class="win-btn secondary" aria-label="Heim">🏠</button>
         </div>
       </div>
     </div>

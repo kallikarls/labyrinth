@@ -119,7 +119,14 @@ export const STRINGS = {
     mgCatSub:         '➖ Frádráttur',
     mgCatMul:         '✖️ Margföldun',
     mgCatDiv:         '➗ Deiling',
-    mgCatMixed:       '🔀 Blandað',    // Language toggle
+    mgCatMixed:       '🔀 Blandað',
+    // Time Game
+    tgName:           'Hvað er klukkan?',
+    tgDesc:           'Lestu klukkuna og veldu rétta tímann',
+    tgStart:          '🕐 Byrja!',
+    tgPlayAgain:      '🔄 Reyna aftur',
+    tgDone:           'Vel gert! 🎉',
+    tgPts:            'stig',    // Language toggle
     langLabel:        'EN',
   },
   en: {
@@ -234,6 +241,13 @@ export const STRINGS = {
     mgCatMul:         '✖️ Multiply',
     mgCatDiv:         '➗ Divide',
     mgCatMixed:       '🔀 Mixed',
+    // Time Game
+    tgName:           "What's the Time?",
+    tgDesc:           'Read the clock and pick the right time',
+    tgStart:          '🕐 Start!',
+    tgPlayAgain:      '🔄 Play Again',
+    tgDone:           'Well done! 🎉',
+    tgPts:            'pts',
     breakoutLevel:    'Level',
     breakoutWin:      'Amazing! 🎉',
     breakoutLaunch:   'Tap or press Space to launch!',
@@ -340,6 +354,8 @@ export function applyAll() {
   // Math Game home card
   _setText('mgName',           t('mgName'));
   _setText('mgDesc',           t('mgDesc'));
+  _setText('tgName',           t('tgName'));
+  _setText('tgDesc',           t('tgDesc'));
 
   // Color Book
   _setText('galleryTitle',     t('colorBook'));

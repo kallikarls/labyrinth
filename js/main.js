@@ -12,6 +12,7 @@ import { Racer }          from './racer.js';
 import { Solitaire }      from './solitaire.js';
 import { WordGame }        from './wordgame.js';
 import { MathGame }        from './mathgame.js';
+import { TimeGame }        from './timegame.js';
 import { applyAll, setLang } from './i18n.js';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -28,6 +29,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const solitaire      = new Solitaire();
   const wordGame       = new WordGame();
   const mathGame       = new MathGame();
+  const timeGame       = new TimeGame();
   game.start();
 
   document.getElementById('btnSnake').addEventListener('click', () => snake.open());
@@ -38,6 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btnSolitaire').addEventListener('click', () => solitaire.open());
   document.getElementById('btnWordGame').addEventListener('click',  () => wordGame.open());
   document.getElementById('btnMathGame').addEventListener('click',  () => mathGame.open());
+  document.getElementById('btnTimeGame').addEventListener('click',  () => timeGame.open());
   document.getElementById('btnLangIS').addEventListener('click', () => {
     setLang('is');
     game._updateStarDisplay();
