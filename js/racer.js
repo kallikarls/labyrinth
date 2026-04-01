@@ -28,6 +28,9 @@ const GRASS_DRAG  = 16;
 const STEER_K     = 3.2;
 const CAR_LIMIT   = ROAD_HW - 1.0;  // crash if |carX| > this
 const MAX_OBS     = 7;
+const MAX_HEALTH  = 3;       // hearts
+const HIT_INVULN  = 2.2;    // seconds of invincibility after a hit
+const HIT_PUSH    = 2.8;    // lateral knockback (world units)
 const BEST_KEY    = 'racer_best';
 
 const ROAD_COLS  = [0x2e2e3a, 0x383848];
@@ -50,12 +53,16 @@ export class Racer {
       btnHome:    document.getElementById('btnRacerHome'),
       btnOverHome:document.getElementById('btnRacerOverHome'),
       btnPause:   document.getElementById('btnRacerPause'),
+      healthEl:   document.getElementById('racerHealth'),
     };
 
-    this._best    = parseInt(localStorage.getItem(BEST_KEY) || '0', 10);
-    this._dist    = 0;
-    this._speed   = SPEED_INIT;
-    this._carX    = 0;
+    this._best      = parseInt(localStorage.getItem(BEST_KEY) || '0', 10);
+    this._dist      = 0;
+    this._speed     = SPEED_INIT;
+    this._health    = MAX_HEALTH;
+    this._invuln    = 0;         // seconds remaining of invincibility
+    this._hitPushV  = 0;         // lateral impulse velocity (world units/s)
+    this._carX      = 0;
     this._carYaw  = 0;
     this._camX    = 0;
     this._paused  = false;
@@ -262,12 +269,15 @@ export class Racer {
   // ── Game flow ─────────────────────────────────────────────────────────────────
 
   _startGame() {
-    this._dist   = 0;
-    this._speed  = SPEED_INIT;
-    this._carX   = 0;
-    this._carYaw = 0;
-    this._camX   = 0;
-    this._paused = false;
+    this._dist      = 0;
+    this._speed     = SPEED_INIT;
+    this._health    = MAX_HEALTH;
+    this._invuln    = 0;
+    this._hitPushV  = 0;
+    this._carX      = 0;
+    this._carYaw    = 0;
+    this._camX      = 0;
+    this._paused    = false;
     this._state  = 'playing';
     this._lastTs = 0;
 
@@ -300,6 +310,22 @@ export class Racer {
     if (this._raf) { cancelAnimationFrame(this._raf); this._raf = null; }
   }
 
+  _takeDamage(pushDir) {
+    this._health--;
+    this._invuln   = HIT_INVULN;
+    this._hitPushV = pushDir;
+    this._speed   *= 0.45;      // big speed penalty on impact
+    this._updateHUD();
+    // Flash the screen red
+    const el = this._ui.screen;
+    el.style.transition = 'none';
+    el.style.outline = '6px solid #e74c3c';
+    setTimeout(() => {
+      el.style.transition = 'outline 0.4s ease';
+      el.style.outline = '6px solid transparent';
+    }, 80);
+  }
+
   _endGame() {
     this._state = 'over';
     this._stopLoop();
@@ -321,9 +347,11 @@ export class Racer {
   }
 
   _updateHUD() {
-    this._ui.scoreEl.textContent = `${Math.floor(this._dist)} m`;
-    this._ui.bestEl.textContent  = `${t('best')}: ${this._best} m`;
-    this._ui.speedEl.textContent = `${Math.round(this._speed * 3.6)} km/h`;
+    this._ui.scoreEl.textContent  = `${Math.floor(this._dist)} m`;
+    this._ui.bestEl.textContent   = `${t('best')}: ${this._best} m`;
+    this._ui.speedEl.textContent  = `${Math.round(this._speed * 3.6)} km/h`;
+    const hearts = '❤️'.repeat(this._health) + '🖤'.repeat(Math.max(0, MAX_HEALTH - this._health));
+    this._ui.healthEl.textContent = hearts;
   }
 
   _showOverlay(type) {
@@ -371,7 +399,14 @@ export class Racer {
     // ── Steer ─────────────────────────────────────────────────────────────────
     const sr = STEER_K * (0.35 + 0.65 * (this._speed / SPEED_MAX));
     this._carX += steer * sr * dt * (this._speed * 0.06 + 1.0);
+    // Apply hit knockback impulse (decays quickly)
+    if (this._hitPushV !== 0) {
+      this._carX    += this._hitPushV * dt;
+      this._hitPushV *= Math.pow(0.05, dt);  // exponential decay
+      if (Math.abs(this._hitPushV) < 0.05) this._hitPushV = 0;
+    }
     this._carX  = Math.max(-(ROAD_HW + 2), Math.min(ROAD_HW + 2, this._carX));
+    if (this._invuln > 0) this._invuln -= dt;
 
     // Visual yaw — smooth to target
     const yawTarget = steer * 0.18;
@@ -410,17 +445,25 @@ export class Racer {
       }
     }
 
-    // ── Crash: edge ───────────────────────────────────────────────────────────
-    if (Math.abs(this._carX) > CAR_LIMIT + 1.4) {
-      this._endGame(); return;
+    // ── Crash: edge (damage, not instant death) ──────────────────────────────
+    if (Math.abs(this._carX) > CAR_LIMIT + 1.4 && this._invuln <= 0) {
+      this._takeDamage(this._carX > 0 ? -HIT_PUSH * 1.5 : HIT_PUSH * 1.5);
+      if (this._health <= 0) { this._endGame(); return; }
     }
 
-    // ── Crash: obstacle ───────────────────────────────────────────────────────
+    // ── Crash: obstacle (damage + knockback) ─────────────────────────────────
     for (const obs of this._obs) {
       if (!obs.active) continue;
       if (obs.z > -3.5 && obs.z < 3.5) {
         if (Math.abs(obs.x - this._carX) < obs.hw + 0.85) {
-          this._endGame(); return;
+          if (this._invuln <= 0) {
+            const push = this._carX >= obs.x ? HIT_PUSH : -HIT_PUSH;
+            this._takeDamage(push);
+            // Push obstacle away too so it doesn't re-hit immediately
+            obs.z -= SEG_LEN * 0.5;
+            obs.mesh.position.z = obs.z;
+            if (this._health <= 0) { this._endGame(); return; }
+          }
         }
       }
     }

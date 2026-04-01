@@ -1383,6 +1383,13 @@ html, body {
   letter-spacing: 0.5px;
 }
 
+.racer-health {
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  user-select: none;
+  filter: drop-shadow(0 0 3px rgba(231,76,60,0.7));
+}
+
 .racer-overlay {
   position: absolute;
   inset: 0;
