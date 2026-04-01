@@ -176,7 +176,6 @@ export class MathGame {
       a      = b * answer;        // guarantee clean division
     }
 
-    const maxVal  = op === '×' ? 144 : op === '÷' ? 12 : 40;
     // Randomly hide: 0=result, 1=operand a, 2=operand b
     const result   = answer;
     const hide     = this._rand(0, 2);
